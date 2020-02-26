@@ -5,3 +5,9 @@ Edit the report at [here](https://qubstudentcloud-my.sharepoint.com/:w:/g/person
 
 ## Meetings
 Meeting notes are [here](meetings/)
+
+## Dataset
+The original dataset is placed at the directory [dataset](dataset/). The Matlab source files read data from that specific directory.
+
+## Source Files
+Matlab source files and folders are placed in [src](src/)
