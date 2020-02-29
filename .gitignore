@@ -1,2 +1,5 @@
 # Do not update the original dataset
 dataset/
+
+# Matlab cache files
+*.asv
