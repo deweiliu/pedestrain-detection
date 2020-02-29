@@ -4,10 +4,8 @@
 clear all
 close all
 
-%% Load matlab script from subfolders
-addpath("./utilities");
-
-%% Read Images
+%% Images Aquisition
+addpath("./image_aquisition");
 pedestrians=loadimages("../dataset/pedestrian/");
 positives=loadimages("../dataset/images/pos/");
 negatives=loadimages("../dataset/images/neg/");
