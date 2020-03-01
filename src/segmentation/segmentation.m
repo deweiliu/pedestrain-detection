@@ -1,7 +1,14 @@
+%% References
+% https://uk.mathworks.com/help/imaq/examples/live-motion-detection-using-optical-flow.html
+% https://uk.mathworks.com/help/vision/ref/opticalflowhs.estimateflow.html
+%% Segmentation function
+% Given image object
+% Return binary images indicating the optical flow in each image
+% * |pedestrians| :   Object returned by image_aquisition.loadimages()
+% * |pedestrians| :   true of false, indicating if the segmentation result is displayed           
+% 
 function segmentated = segmentation(pedestrians,isDisplay)
-    % TODO function for segmentation
-    % reference https://uk.mathworks.com/help/imaq/examples/live-motion-detection-using-optical-flow.html
-% reference https://uk.mathworks.com/help/vision/ref/opticalflowhs.estimateflow.html
+
 
 % Threshold for flow vector to detect movement
 THRESHOLD=0.1;
