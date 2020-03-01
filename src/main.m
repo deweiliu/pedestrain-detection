@@ -18,7 +18,7 @@ negatives.images = preprocessing(negatives);
 
 %% Segmentation TODO
 addpath("./segmentation");
-pedestrians.segmentated = segmentation(pedestrians,true);
+pedestrians.segmentated = segmentation(pedestrians, true);
 
 %% Feature Extraction TODO
 addpath("./features");
@@ -33,8 +33,8 @@ model = train(positives, negatives);
 
 % Predicting based on sampled training data
 % Combine positives and negatives
-combined.features = [positives.features;negatives.features];
-combined.labels = [ones(positives.number,1);zeros(negatives.number,1)].';
+combined.features = [positives.features; negatives.features];
+combined.labels = [ones(positives.number, 1); zeros(negatives.number, 1)].';
 % Randomly sample from combined
 sampleIndexes = randsample(1:length(combined.features), 100);
 sample.features = combined.features(sampleIndexes);
@@ -45,8 +45,8 @@ sample.result = test(sample, model);
 % Predicting based on test data
 % pedestrians.result = test(pedestrians, model);
 
-comparison = (sample.labels==sample.result);
-Accuracy = sum(comparison)/length(comparison)
+comparison = (sample.labels == sample.result);
+Accuracy = sum(comparison) / length(comparison)
 
 %% presenting the result TODO
 addpath("./presentation");
