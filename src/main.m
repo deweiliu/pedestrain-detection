@@ -18,7 +18,7 @@ negatives.images = preprocessing(negatives);
 
 %% Segmentation TODO
 addpath("./segmentation");
-pedestrians.segmentated = segmentation(pedestrians);
+pedestrians.segmentated = segmentation(pedestrians,true);
 
 %% Feature Extraction TODO
 addpath("./features");

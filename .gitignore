@@ -6,3 +6,6 @@ dataset/
 
 # Do not upload the output files
 src/output/
+
+# Testing scripts
+*test*.m
