@@ -12,12 +12,19 @@ negatives=loadimages("../dataset/images/neg/");
 
 %% Pre-processing TODO
 addpath("./preprocessing");
-pedestrians.images=preprocessing(pedestrians.images);
-positives.images=preprocessing(positives.images);
-negatives.images=preprocessing(negatives.images);
+pedestrians.images=preprocessing(pedestrians);
+positives.images=preprocessing(positives);
+negatives.images=preprocessing(negatives);
 
 %% Segmentation TODO
 addpath("./segmentation");
 pedestrians.segmentated=segmentation(pedestrians);
+
+%% Feature Extraction TODO
+addpath("./features");
+pedestrians.features=featureextraction(pedestrians);
+positives.features=featureextraction(positives);
+negatives.features=featureextraction(negatives);
+
 
 
