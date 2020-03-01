@@ -1,3 +1,3 @@
-function result=test(pedestrians,model)
-result="TODO: calculate the result";
+function result=test(pedestrians, model)
+    result = nntest(pedestrians, model);
 end
