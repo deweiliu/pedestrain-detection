@@ -26,5 +26,14 @@ pedestrians.features=featureextraction(pedestrians);
 positives.features=featureextraction(positives);
 negatives.features=featureextraction(negatives);
 
+%% Classification TODO
+addpath("./classification");
+model=train(positives,negatives);
+pedestrians.result=test(pedestrians,model);
+
+%% presenting the result TODO
+addpath("./presentation");
+present(pedestrians);
+
 
 
