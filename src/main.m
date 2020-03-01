@@ -15,3 +15,9 @@ addpath("./preprocessing");
 pedestrians.images=preprocessing(pedestrians.images);
 positives.images=preprocessing(positives.images);
 negatives.images=preprocessing(negatives.images);
+
+%% Segmentation TODO
+addpath("./segmentation");
+pedestrians.segmentated=segmentation(pedestrians);
+
+
