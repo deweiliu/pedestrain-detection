@@ -5,17 +5,17 @@ function [fx, fy, ft] = computeDerivatives(im1, im2)
     end
 
     % Horn-Schunck original method
-    first=conv2(im1, 0.25 * [-1 1; -1 1], 'same');
-    second=conv2(im2, 0.25 * [-1 1; -1 1], 'same');
+    first = conv2(im1, 0.25 * [-1, 1; -1, 1], 'same');
+    second = conv2(im2, 0.25 * [-1, 1; -1, 1], 'same');
     fx = first + second;
 
-    first= conv2(im1, 0.25 * [-1 -1; 1 1], 'same');
-    second=conv2(im2, 0.25 * [-1 -1; 1 1], 'same');
-    fy =first + second;
-    
+    first = conv2(im1, 0.25 * [-1, -1; 1, 1], 'same');
+    second = conv2(im2, 0.25 * [-1, -1; 1, 1], 'same');
+    fy = first + second;
+
     first = conv2(im1, 0.25 * ones(2), 'same');
-    second=conv2(im2, -0.25 * ones(2), 'same');
-    ft = first+second ;
+    second = conv2(im2, -0.25 * ones(2), 'same');
+    ft = first + second;
 
     % derivatives as in Barron
     % fx= conv2(im1,(1/12)*[-1 8 0 -8 1],'same');

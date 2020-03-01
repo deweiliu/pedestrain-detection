@@ -22,3 +22,4 @@ function smoothedImg = smoothImg(img, segma)
     G = gaussFilter(segma);
     smoothedImg = conv2(img, G, 'same');
     smoothedImg = conv2(smoothedImg, G', 'same');
+end

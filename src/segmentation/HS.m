@@ -80,7 +80,7 @@ function [u, v] = HS(im1, im2, alpha, ite, uInitial, vInitial, displayFlow, disp
     [fx, fy, ft] = computeDerivatives(im1, im2);
 
     % Averaging kernel
-    kernel_1=[1/12 1/6 1/12;1/6 0 1/6;1/12 1/6 1/12];
+    kernel_1 = [1/12, 1/6, 1/12; 1/6, 0, 1/6; 1/12, 1/6, 1/12];
 
     % Iterations
     for i = 1:ite

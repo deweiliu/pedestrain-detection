@@ -6,32 +6,31 @@ close all
 
 %% Images Aquisition
 addpath("./image_aquisition");
-pedestrians=loadimages("../dataset/pedestrian/");
-positives=loadimages("../dataset/images/pos/");
-negatives=loadimages("../dataset/images/neg/");
+pedestrians = loadimages("../dataset/pedestrian/");
+positives = loadimages("../dataset/images/pos/");
+negatives = loadimages("../dataset/images/neg/");
 
 %% Pre-processing TODO
 addpath("./preprocessing");
-pedestrians.images=preprocessing(pedestrians);
-positives.images=preprocessing(positives);
-negatives.images=preprocessing(negatives);
+pedestrians.images = preprocessing(pedestrians);
+positives.images = preprocessing(positives);
+negatives.images = preprocessing(negatives);
 
 %% Segmentation TODO
 addpath("./segmentation");
-pedestrians.segmentated=segmentation(pedestrians);
+pedestrians.segmentated = segmentation(pedestrians);
 
 %% Feature Extraction TODO
 addpath("./features");
-pedestrians.features=featureextraction(pedestrians);
-positives.features=featureextraction(positives);
-negatives.features=featureextraction(negatives);
+pedestrians.features = featureextraction(pedestrians);
+positives.features = featureextraction(positives);
+negatives.features = featureextraction(negatives);
 
 %% Classification TODO
 addpath("./classification");
-model=train(positives,negatives);
-pedestrians.result=test(pedestrians,model);
+model = train(positives, negatives);
+pedestrians.result = test(pedestrians, model);
 
 %% presenting the result TODO
 addpath("./presentation");
 present(pedestrians);
-
