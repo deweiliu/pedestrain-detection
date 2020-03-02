@@ -8,4 +8,4 @@ dataset/
 src/output/
 
 # Testing scripts
-*test*.m
+*_test*.m

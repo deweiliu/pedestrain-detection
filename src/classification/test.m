@@ -1,3 +1,3 @@
 function result=test(pedestrians, model)
-    result = nntest(pedestrians, model);
+    result = knntest(pedestrians, model, 1);
 end
