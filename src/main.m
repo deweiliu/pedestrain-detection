@@ -33,7 +33,6 @@ addpath("./classification");
 model = train(positives, negatives);
 pedestrians.result = test(pedestrians, model);
 
-
 %% presenting the result TODO
 addpath("./presentation");
 present(pedestrians);
