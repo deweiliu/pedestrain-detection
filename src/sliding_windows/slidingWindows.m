@@ -7,18 +7,28 @@
 % gapPercentage (double), 0~1 - the gap of two sliding windows (in percentage)
 %% Return:
 % A list of struct
-% field - originFrame: 4-D array representing the original video
+% field - originFrames: 4-D array representing the original colored video
 % field - slidingWidth: The width of each sliding image
 % field - slidingHeight: The height of each sliding image
 % field - horizontalGap/verticalGap: is the number of pixels which is the gap between each sliding windows
 % field - nRows*nColumns: is the number of sliding images in each frame
 % field - nRows*nColumns*nFrames: is the number of sliding images in the video
 % field - slidingWindows (3D matrix of objects) - All the sliding windows in the video. Usage: slidingWindows(rowIndex,columnIndex,frameIndex) is an object containing a sliding image
-function slidingWindowsList = slidingWindowsParams(pedestrians,slidingWidth,slidingHeight,scales,gapPercentage)
+%
+% EXAMPLE: 
+% To get a specific sliding window
+% window = slidingWindowsList(scaleIndex).slidingWindows(rowIndex,columnIndex,frameIndex)
+% To show the image in the sliding window
+% imshow(window.image);
+%
+function slidingWindowsList = slidingWindows(pedestrians,slidingWidth,slidingHeight,scales,gapPercentage)
 frames=pedestrians.images;
 slidingWindowsList=[];
 for scaleIndex=1:length(scales)
-scale=scales(scaleIndex);
+    scale=scales(scaleIndex);
+
+    disp(fprintf("Genrating sliding windows for scale = %.2f, gap = %.0f%%\nPlease wait...", scale,gapPercentage*100));
+
 slidingWindowsPerVideo=slidingWindowsVideo(frames,slidingWidth,slidingHeight,scale,gapPercentage);
 slidingWindowsList=[slidingWindowsList,slidingWindowsPerVideo];
 end

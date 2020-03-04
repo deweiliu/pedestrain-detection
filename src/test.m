@@ -1,6 +1,7 @@
 clear all
 close all
 addpath("./segmentation");
+addpath("./image_aquisition");
 pedestrians = loadimages("../dataset/pedestrian/");
 scales=[1,2];
 

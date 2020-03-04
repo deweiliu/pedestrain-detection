@@ -11,12 +11,7 @@
 % nRows*nColumns*nFrames: is the number of sliding images in the video
 % slidingWindows (3D matrix of objects) - All the sliding windows in the video. Usage: slidingWindows(rowIndex,columnIndex,frameIndex) is an object containing a sliding image
 %
-% EXAMPLE: 
-% To get a specific sliding window
-% window = slidingWindowsResult(scaleIndex).slidingWindows(rowIndex,columnIndex,frameIndex)
-% To show the image in the sliding window
-% imshow(window.image);
-%
+
 function slidingWindowsResult = slidingWindowsVideo(frames,slidingWidth,slidingHeight,scale,gapPercentage)
 slidingWidth=uint16(double(slidingWidth)*double(scale));
 slidingHeight=uint16(double(slidingHeight)*double(scale));
