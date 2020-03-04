@@ -16,7 +16,7 @@
 %
 % EXAMPLE:
 % To get a specific sliding window
-% window = slidingWindowsList(scaleIndex).slidingWindows(rowIndex,columnIndex,frameIndex)
+% window = slidingWindowsList(scaleIndex).windows(rowIndex,columnIndex,frameIndex)
 % To show the image in the sliding window
 % imshow(window.image);
 %
