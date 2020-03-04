@@ -20,11 +20,11 @@ negatives.images = preprocessing(negatives);
 
 %% Sliding windows
 addpath("./sliding_windows");
-SLIDING_WIDTH=positives.nRows;
-SLIDING_HEIGHT=positives.nColumns;
-SLIDING_SCALES=[0.5,0.8,1,2];
-SLIDING_GAP_PERCENTAGE=0.1; % 10 per cent
-pedestrians.slidingWindows=slidingWindows(pedestrians,SLIDING_WIDTH,SLIDING_HEIGHT,SLIDING_SCALES,SLIDING_GAP_PERCENTAGE);
+SLIDING_WIDTH = positives.nRows;
+SLIDING_HEIGHT = positives.nColumns;
+SLIDING_SCALES = [0.5, 0.8, 1, 2];
+SLIDING_GAP_PERCENTAGE = 0.1; % 10 per cent
+pedestrians.slidingWindows = slidingwindows(pedestrians, SLIDING_WIDTH, SLIDING_HEIGHT, SLIDING_SCALES, SLIDING_GAP_PERCENTAGE);
 
 %% Segmentation TODO
 addpath("./segmentation");
