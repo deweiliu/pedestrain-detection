@@ -7,12 +7,12 @@
 % gapPercentage (double), 0~1 - the gap of two sliding windows (in percentage)
 %% Return:
 % A list of struct
-% field - slidingWidth: The width of each sliding image
-% field - slidingHeight: The height of each sliding image
+% field - width: The width of each sliding image
+% field - height: The height of each sliding image
 % field - horizontalGap/verticalGap: is the number of pixels which is the gap between each sliding windows
 % field - nRows*nColumns: is the number of sliding images in each frame
 % field - nRows*nColumns*nFrames: is the number of sliding images in the video
-% field - slidingWindows (3D matrix of objects) - All the sliding windows in the video. Usage: slidingWindows(rowIndex,columnIndex,frameIndex) is an object containing a sliding image
+% field - windows (3D matrix of objects) - All the sliding windows in the video. Usage: slidingWindows(rowIndex,columnIndex,frameIndex) is an object containing a sliding image
 %
 % EXAMPLE:
 % To get a specific sliding window

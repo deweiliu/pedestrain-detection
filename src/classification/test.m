@@ -3,7 +3,7 @@ function result=test(pedestrians, model)
     
         
     % To feed the feature values of each sliding window to the classifer
-    % featureValues=pedestrians.slidingWindows(scaleIndex).slidingWindows(rowIndex,columnIndex,frameIndex).feature;    
+    % featureValues=pedestrians.sliding(scaleIndex).windows(rowIndex,columnIndex,frameIndex).feature;    
     % true or false =classifier(featureValues,model);
-    % pedestrians.slidingWindows(scaleIndex).slidingWindows(rowIndex,columnIndex,frameIndex).isHuman= true or false;
+    % pedestrians.sliding(scaleIndex).windows(rowIndex,columnIndex,frameIndex).isHuman= true or false;
 end

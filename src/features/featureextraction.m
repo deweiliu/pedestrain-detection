@@ -7,5 +7,5 @@ function features = featureextraction(object)
     % img=pedestrians.slidingWindows(scaleIndex).slidingWindows(rowIndex,columnIndex,frameIndex).image;
     % imshow(img);
     % featureValues=featureExtractionFunction(img);
-    % pedestrians.slidingWindows(scaleIndex).slidingWindows(rowIndex,columnIndex,frameIndex).feature=featureValues;
+    % pedestrians.sliding(scaleIndex).windows(rowIndex,columnIndex,frameIndex).feature=featureValues;
 end
