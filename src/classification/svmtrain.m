@@ -1,12 +1,13 @@
 %% Reference
 % https://uk.mathworks.com/help/stats/fitcsvm.html
-function [model] = svm_train(features)
-%model: the fitted model by svm
-%  using all image to fit the svm model
-
+%% Parameters
+% features(matrix) - the features matrix
+%% Returns
+% model - the fitted model by svm
+function [model] = svmtrain(features)
 % first col is the label
 Labels = features(:,1);
 % the rest is feature info
 feature_data = features(:,2:end);
-model = fitcsvm(feature_data,Labels);
+model = fitcsvm(feature_data,Labels,'KernelFunction','linear');
 end
