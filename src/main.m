@@ -11,6 +11,7 @@ positives = loadimages("../dataset/images/pos/");
 negatives = loadimages("../dataset/images/neg/");
 positives.labels = ones(positives.number, 1);
 negatives.labels = zeros(negatives.number, 1);
+pedestrians.labels = zeros(pedestrians.number, 1) -1;
 
 %% Pre-processing TODO
 addpath("./preprocessing");
@@ -53,10 +54,25 @@ visualize_prediction(pedestrians, scale_index, frame_index)
 % pedestrians.segmentated = segmentation(pedestrians, true);
 
 %% Feature Extraction TODO
-% addpath("./features");
-% pedestrians.features = featureextraction(pedestrians);
-% positives.features = featureextraction(positives);
-% negatives.features = featureextraction(negatives);
+addpath("./features");
+positives.features = featureextraction(positives);
+negatives.features = featureextraction(negatives);
+pedestrians.features = featureextraction(pedestrians);
+
+% check the existance of features files folder
+if exist('../dataset/features_datasets','dir')==0
+    disp(fprintf("path: ../dataset/features_datasets does not exist.\nCreating one."));
+    mkdir('../dataset/features_datasets'); 
+end
+disp(fprintf("Saving features."));
+trainingFeatures = [positives.features; negatives.features];
+% shuffle the data
+rng(3064);
+trainingFeatures = trainingFeatures(randperm(size(trainingFeatures,1)),:);
+% write on a csv file
+disp(fprintf('Saving as csv file.'))
+writetable(trainingFeatures, '../dataset/features_datasets/training_features.csv')
+disp(fprintf('Saving finish.'))
 
 %% Classification TODO
 % addpath("./classification");

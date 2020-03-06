@@ -9,3 +9,6 @@ src/output/
 
 # Testing scripts
 *_test*.m
+
+# Matlab workspace files
+*.mat

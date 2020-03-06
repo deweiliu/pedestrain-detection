@@ -1,7 +1,7 @@
-function [dEuc] = euclideandistance(sample1, sample2)
+function [dEuc] = euclideandistance(firstSampleRow, secondSampleRow)
     diffSum = 0;
-    for i = 1:length(sample1)
-        diffSum = diffSum + (sample1(i) - sample2(i)) ^ 2;
+    for i = 1:width(firstSampleRow)
+        diffSum = diffSum + (firstSampleRow{1, i} - secondSampleRow{1, i}) ^ 2;
     end
     dEuc = sqrt(diffSum);
 end

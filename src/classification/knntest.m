@@ -1,12 +1,13 @@
 function [result] = knntest(testing, model, K)
-    % for every value to be predicted
-    for i=1:length(testing.features)
+    % for every row in the feature table
+    for i=1:height(testing.features)
         % get test value features
-        testSample = testing.features(i, :);
+        featureRow = testing.features(i, :);
+        height(model.features)
         % calculate euclidean distance for between test and training data
-        for j=1:length(model.features)
-            comparison = model.features(j, :);
-            eucDistance = euclideandistance(testSample, comparison);
+        for j=1:height(model.features)
+            comparisonRow = model.features(j, :);
+            eucDistance = euclideandistance(featureRow, comparisonRow);
             distanceLabels(j, 1) = eucDistance;
             distanceLabels(j, 2) = model.labels(j);
         end
