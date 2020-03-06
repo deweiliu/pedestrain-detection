@@ -9,7 +9,7 @@ nCols = pedestrians.sliding(scale_index).nColumns;
 num = 0;
 for rowindex = 1:nRows
     for colindex = 1:nCols
-        if pedestrians.sliding(scale_index).windows(rowindex, colindex, frame_index).label == 1
+        if pedestrians.sliding(scale_index).windows(rowindex, colindex, frame_index).label_HOG == 1
             % display all images which are predicted as human image
             imshow(pedestrians.sliding(scale_index).windows(rowindex, colindex, frame_index).image)
             num = num + 1;
