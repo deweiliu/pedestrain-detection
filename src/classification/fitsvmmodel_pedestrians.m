@@ -16,7 +16,7 @@ for scale = 1:size(pedestrians.sliding,2)
                 % make prediction
                 predicted_label = ...
                     predict(model, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
-                pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label = predicted_label;
+                pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG = predicted_label;
             end
         end
     end

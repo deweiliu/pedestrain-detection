@@ -22,7 +22,7 @@ function cropedImage = cropimage(image, position)
     output.topRight = [x + width - 1, y];
     output.bottomLeft = [x, y + height - 1];
     output.bottomRight = [x + width - 1, y + height - 1];
-    output.label = 0;
+    output.label_HOG = 0;
     output.features_HOG = 0;
 
     % BUG in matlab  '9.6.0.1135713 (R2019a) Update 3:
