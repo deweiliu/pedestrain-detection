@@ -55,8 +55,11 @@ visualize_prediction(pedestrians, scale_index, frame_index)
 
 %% Feature Extraction TODO
 addpath("./features");
+disp(fprintf('Generating positive features...'))
 positives.features = featureextraction(positives);
+disp(fprintf('Generating negative features...'))
 negatives.features = featureextraction(negatives);
+disp(fprintf('Generating pedestrian features...'))
 pedestrians.features = featureextraction(pedestrians);
 
 % check the existance of features files folder
@@ -75,9 +78,9 @@ writetable(trainingFeatures, '../dataset/features_datasets/training_features.csv
 disp(fprintf('Saving finish.'))
 
 %% Classification TODO
-% addpath("./classification");
-% model = train(positives, negatives);
-% pedestrians.result = test(pedestrians, model);
+addpath("./classification");
+svm_model_HOG = svmtrain(trainingFeatures);
+svmtest(svm_model_HOG);
 
 %% presenting the result TODO
 % addpath("./presentation");

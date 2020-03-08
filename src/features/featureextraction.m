@@ -2,14 +2,30 @@ function features = featureextraction(object)
     % Add in label column
     headings = ["Label"];
     features = [object.labels];
+        
+    disp(fprintf('Generating colour histogram features...'))
+    colourHistogramFeatures = colourHistogram(object, 8);
+    features = [features, colourHistogramFeatures];
+    % Generate colour histogram headings
+    for i=1:size(colourHistogramFeatures, 2)
+        headings = [headings, sprintf("colour_histogram_bin_%d", i)];
+    end
+    disp(fprintf('Finished generating colour histogram features.'))
     
-    % Add in colour histogram results
-    colourHistogramResult = colourHistogram(object, 8);
-    headings = [headings, colourHistogramResult(1,:)];
-    features = [features, colourHistogramResult(2:end,:)];
-    
-    % Convert table to numerical
-    features = str2double(features);
+    disp(fprintf('Generating HOG features...'))
+    HOGfeatures = [];
+    for i=1:size(object.paths,1)
+        pos_image = imread(object.paths(i));
+        [featureVector,~] = extractHOGFeatures(pos_image,'CellSize',[12,12]);
+        HOGfeatures = [HOGfeatures;featureVector];
+    end
+    % Generate HOG headings
+    for i=1:size(HOGfeatures, 2)
+        headings = [headings, sprintf("HOG_feature_%d", i)];
+    end
+    features = [features, HOGfeatures];
+    disp(fprintf('Finished generating HOG features.'))
+        
     % Output as table
     features = array2table(features, 'VariableNames', headings);
     

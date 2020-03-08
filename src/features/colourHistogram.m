@@ -19,11 +19,5 @@ function [result] = colourHistogram(data, quantizationColors)
         hist = [redHist.', greenHist.', blueHist.'];
         result = [result; hist];
     end
-    [rows, columns] = size(result);
-    headings = [];
-    for i=1:columns
-        headings = [headings, sprintf("colour_histogram_bin_%d", i)];
-    end
-    result = [headings; result];
 end
 
