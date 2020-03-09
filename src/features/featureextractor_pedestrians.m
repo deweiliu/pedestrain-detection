@@ -26,4 +26,3 @@ end
 % update the pedestrians struct
 updated_pedestrians = pedestrians;
 end
-
