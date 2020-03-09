@@ -1,4 +1,4 @@
-function [dEuc] = euclideandistance(firstSampleRow, secondSampleRow)
+function [dEuc] = euclideanDistance(firstSampleRow, secondSampleRow)
     diffSum = 0;
     for i = 1:width(firstSampleRow)
         diffSum = diffSum + (firstSampleRow{1, i} - secondSampleRow{1, i}) ^ 2;

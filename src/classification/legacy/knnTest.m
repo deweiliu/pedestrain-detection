@@ -1,4 +1,4 @@
-function [result] = knntest(testing, model, K)
+function [result] = knnTest(testing, model, K)
     % for every row in the feature table
     for i=1:height(testing.features)
         % get test value features
@@ -7,9 +7,9 @@ function [result] = knntest(testing, model, K)
         % calculate euclidean distance for between test and training data
         for j=1:height(model.features)
             comparisonRow = model.features(j, :);
-            eucDistance = euclideandistance(featureRow, comparisonRow);
+            eucDistance = euclideanDistance(featureRow, comparisonRow);
             distanceLabels(j, 1) = eucDistance;
-            distanceLabels(j, 2) = model.labels(j);
+            distanceLabels(j, 2) = model.Labels(j);
         end
         % sort by distance
         [~, idx] = sort(distanceLabels(:, 1));
