@@ -12,3 +12,6 @@ src/output/
 
 # Matlab workspace files
 *.mat
+
+# windows cache file
+**humbs.db
