@@ -12,21 +12,23 @@
 % field - frameIndex(integer) - the index of current frame
 % field - image(2-D matrix) - displayable image of current frame
 % field - labels(2-D matrix) - labels returned by [bwlabel]
-function labelledImages=labelling(slidingCounts,threshold,connectivity)
-nFrames=size(slidingCounts);
-labelledImages=[];
-for frameIndex=1:nFrames
-slidingCount=slidingCounts(frameIndex).counts;
-binaryImage=slidingCount>=threshold;
-labels=bwlabel(binaryImage,connectivity);
-number=max(max(labels));
+function labelledImages = labelling(slidingCounts, threshold, connectivity)
+    nFrames = size(slidingCounts);
+    labelledImages = [];
 
-labelledImage.frameIndex=frameIndex;
-labelledImage.title=sprintf("Counting threshold = %d",threshold);
-labelledImage.image=label2rgb(labels,"spring","black");
-labelledImage.number=number;
-labelledImage.labels=labels;
+    for frameIndex = 1:nFrames
+        slidingCount = slidingCounts(frameIndex).counts;
+        binaryImage = slidingCount >= threshold;
+        labels = bwlabel(binaryImage, connectivity);
+        number = max(max(labels));
 
-labelledImages=[labelledImages;labelledImage];
-end
+        labelledImage.frameIndex = frameIndex;
+        labelledImage.title = sprintf("Counting threshold = %d", threshold);
+        labelledImage.image = label2rgb(labels, "spring", "black");
+        labelledImage.number = number;
+        labelledImage.labels = labels;
+
+        labelledImages = [labelledImages; labelledImage];
+    end
+
 end
