@@ -2,7 +2,7 @@
 % pedestrians(struct) - the pedestrians object
 %% Returns
 % updated_pedestrians(struct) - the updated struct of object pedestrians with generating features
-function [updated_pedestrians] = featureextractor_pedestrians(pedestrians)
+function [updated_pedestrians] = featureExtractorPedestrians(pedestrians)
 % looping the scale
 for scale = 1: size(pedestrians.sliding, 2)
     nFrames = pedestrians.sliding(scale).nFrames;
@@ -17,7 +17,7 @@ for scale = 1: size(pedestrians.sliding, 2)
                 % resize the image as 160 * 96
                 resize_sub_testimage = imresize(pedestrians_each, [160, 96]);
                 % generating features
-                feature = testfeaturegenerator_HOG(resize_sub_testimage);
+                feature = histogramOfOrientedGradients(resize_sub_testimage);
                 pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG = feature;
             end
         end

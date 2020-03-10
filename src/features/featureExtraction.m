@@ -25,12 +25,12 @@ function features = featureExtraction(positives, negatives)
         disp(fprintf('Generating features for positive data'));
         for i=1:length(positives.images)
             image = positives.images(:,:,:,i);
-            features.HOG = [features.HOG; testfeaturegenerator_HOG(image)];
+            features.HOG = [features.HOG; histogramOfOrientedGradients(image)];
         end
         disp(fprintf('Generating features for negative data'));
         for i=1:length(negatives.images)
             image = negatives.images(:,:,:,i);
-            features.HOG = [features.HOG; testfeaturegenerator_HOG(image)];
+            features.HOG = [features.HOG; histogramOfOrientedGradients(image)];
         end
         
         % Convert to table
