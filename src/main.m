@@ -51,9 +51,8 @@ pedestrians = pedestriansPredictor(pedestrians, svmModel, knnModel);
 
 %% Visualize human images
 addpath("./visualization")
-scale_index = 4; % It can be 1 to 4 corresponding the position in 'SLIDING_SCALES'
-frame_index = 1; % It can be 1 to 100 corresponding which frame to visualize
-visualize_prediction(pedestrians, scale_index, frame_index)
+frame_index = 20; % It can be 1 to 100 corresponding which frame to visualize
+visualizePrediction(pedestrians, frame_index)
 
 %% presenting the result TODO
 addpath("./presentation");
