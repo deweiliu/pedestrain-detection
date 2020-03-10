@@ -8,10 +8,16 @@
 % highlightedWindow (2-D matrix) which has only values 0 or 1
 function highlightedWindow = highlightSlidingPerWindow(totalRows, totalColumns, window)
     highlightedWindow = zeros(totalRows, totalColumns);
+    
+    ymin=window.topLeft(2);
+    ymax=window.bottomRight(2);
+    
+    xmin=window.topLeft(1);
+    xmax=window.bottomRight(1);
 
-    for row = window.topLeft(2):window.bottomRight(2)
+    for row =ymin:ymax
 
-        for column = window.topLeft(1):window.bottomRight(1)
+        for column =xmin:xmax
             highlightedWindow(row, column) = 1;
         end
 

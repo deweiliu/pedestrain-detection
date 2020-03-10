@@ -9,11 +9,11 @@
 %
 % Return:
 % highlightedImage (2-D matrix)
-function highlightedImage = highlightSlidingPerFrame(pedestrians, frameIndex)
+function highlightedImage = highlightSlidingPerFrame(pedestrians, frameIndex,method)
     rows = pedestrians.nRows;
     columns = pedestrians.nColumns;
     highlightedImage = uint8(zeros(rows, columns));
-    identifiedWindows = findIdentifiedWindowsPerFrame(pedestrians.sliding, frameIndex);
+    identifiedWindows = findIdentifiedWindowsPerFrame(pedestrians.sliding, frameIndex,method);
     nWindows = size(identifiedWindows, 2);
 
     for windowIndex = 1:nWindows
@@ -24,7 +24,7 @@ function highlightedImage = highlightSlidingPerFrame(pedestrians, frameIndex)
     highlightedImage = uint8(highlightedImage);
 end
 
-function identifiedWindows = findIdentifiedWindowsPerFrame(allSlidings, frameIndex)
+function identifiedWindows = findIdentifiedWindowsPerFrame(allSlidings, frameIndex,method)
     identifiedWindows = [];
     nScales = size(allSlidings, 2);
 
@@ -39,7 +39,7 @@ function identifiedWindows = findIdentifiedWindowsPerFrame(allSlidings, frameInd
 
                 window = sliding.windows(row, column, frameIndex);
 
-                if window.label_HOG_SVM == 1
+                if verifyResult(window,method)
                     identifiedWindows = [identifiedWindows, window];
                 end
 
@@ -50,3 +50,18 @@ function identifiedWindows = findIdentifiedWindowsPerFrame(allSlidings, frameInd
     end
 
 end
+
+function isHuman=verifyResult(window,labelName)
+result=window.(labelName);
+if iscell(result)
+    result=result{1,1};
+end
+isHuman=logical(result);
+
+end
+
+
+
+
+
+

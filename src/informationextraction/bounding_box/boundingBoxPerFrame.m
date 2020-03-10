@@ -23,8 +23,8 @@ function bounding = boundingBoxPerFrame(labelledImage, originImage)
     end
 
     bounding.frameIndex = labelledImage.frameIndex;
-    bounding.title = labelledImage.title;
-    bounding.image = image; % TODO
+    bounding.title = sprintf("%d pedestrians detected",labelledImage.number);
+    bounding.image = image;
     bounding.number = labelledImage.number;
     bounding.boxes = boxes;
 

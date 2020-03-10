@@ -57,8 +57,13 @@ frame_index = 20; % It can be 1 to 100 corresponding which frame to visualize
 %% Extract information of pedestrians
 % reference https://uk.mathworks.com/matlabcentral/answers/247180-how-may-i-add-all-subfolders-in-my-matlab-path
 addpath(genpath("informationextraction"));
-THRESHOLD=2;
-result=informationExtraction(pedestrians,THRESHOLD);
-%% presenting the result TODO
-addpath("./presentation");
-present(pedestrians);
+THRESHOLD=2; % Greater or equal to 1, integer
+LABELLING_CONNECTIVITY=4; % 8 or 4  # See https://uk.mathworks.com/help/images/ref/bwlabel.html
+pedestrians.results=informationExtraction(pedestrians,THRESHOLD,LABELLING_CONNECTIVITY);
+
+
+%% presenting the result
+% Re-run this block to rewatch the result %
+addpath(genpath("presentation"));
+FRAME_PER_SECOND=5;
+presentation(pedestrians,FRAME_PER_SECOND);
