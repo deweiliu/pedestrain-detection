@@ -37,7 +37,7 @@ knnTest(knnModel);
 addpath("./sliding_windows");
 SLIDING_WIDTH = positives.nColumns;
 SLIDING_HEIGHT = positives.nRows;
-SLIDING_SCALES = [0.8, 1.2, 1.6, 2];
+SLIDING_SCALES = [0.8, 1.2,1.6, 2];
 SLIDING_GAP_PERCENTAGE = 0.4; % 40 per cent
 pedestrians.sliding = slidingwindows(pedestrians, SLIDING_WIDTH, SLIDING_HEIGHT, SLIDING_SCALES, SLIDING_GAP_PERCENTAGE);
 
@@ -52,8 +52,13 @@ pedestrians = pedestriansPredictor(pedestrians, svmModel, knnModel);
 %% Visualize human images
 addpath("./visualization")
 frame_index = 20; % It can be 1 to 100 corresponding which frame to visualize
-visualizePrediction(pedestrians, frame_index)
+%visualizePrediction(pedestrians, frame_index)
 
+%% Extract information of pedestrians
+% reference https://uk.mathworks.com/matlabcentral/answers/247180-how-may-i-add-all-subfolders-in-my-matlab-path
+addpath(genpath("informationextraction"));
+THRESHOLD=2;
+result=informationExtraction(pedestrians,THRESHOLD);
 %% presenting the result TODO
 addpath("./presentation");
 present(pedestrians);
