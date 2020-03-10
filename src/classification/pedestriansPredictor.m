@@ -16,7 +16,7 @@ for scale = 1:size(pedestrians.sliding,2)
                 % make prediction for svm
                 label1 = ...
                     predict(svmModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
-                pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_SVM = str2double(label1(1,1));
+                pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_SVM = label1;
 %               % make prediction for knn
 %               label2 = ...
 %                   predict(knnModel, double(pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG));
