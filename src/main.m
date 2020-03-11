@@ -22,9 +22,6 @@ pedestrians.images = preprocessing(pedestrians);
 positives.images = preprocessing(positives);
 negatives.images = preprocessing(negatives);
 
-%% Optical Flow
-pedestrians.segmentated=segmentation(pedestrians,true);
-
 %% Feature Extraction on training set
 features = featureExtraction(positives, negatives);
 
@@ -49,14 +46,17 @@ pedestrians = featureExtractorPedestrians(pedestrians);
 %% Making prediction on all testing images by fitted model (SVM KNN)
 pedestrians = pedestriansPredictor(pedestrians, svmModel, knnModel);
 
-%% Visualize human images
-frame_index = 20; % It can be 1 to 100 corresponding which frame to visualize
-visualizePrediction(pedestrians, frame_index);
-
 %% Extract information of pedestrians
 THRESHOLD = 2; % Greater or equal to 1, integer
 LABELLING_CONNECTIVITY = 4; % 8 or 4  # See https://uk.mathworks.com/help/images/ref/bwlabel.html
 pedestrians.results = informationExtraction(pedestrians, THRESHOLD, LABELLING_CONNECTIVITY);
+
+%% Optical Flow
+pedestrians.segmentated=segmentation(pedestrians,true);
+
+%% Visualize human images
+frame_index = 20; % It can be 1 to 100 corresponding which frame to visualize
+visualizePrediction(pedestrians, frame_index);
 
 %% presenting the result
 % Re-run this block to rewatch the result %
