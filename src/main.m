@@ -22,6 +22,9 @@ pedestrians.images = preprocessing(pedestrians);
 positives.images = preprocessing(positives);
 negatives.images = preprocessing(negatives);
 
+%% Optical Flow
+pedestrians.segmentated=segmentation(pedestrians,true);
+
 %% Feature Extraction on training set
 features = featureExtraction(positives, negatives);
 
