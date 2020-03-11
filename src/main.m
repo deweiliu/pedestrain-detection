@@ -48,7 +48,7 @@ pedestrians = pedestriansPredictor(pedestrians, svmModel, knnModel);
 
 %% Visualize human images
 frame_index = 20; % It can be 1 to 100 corresponding which frame to visualize
-visualizePrediction(pedestrians, frame_index)
+visualizePrediction(pedestrians, frame_index);
 
 %% Extract information of pedestrians
 THRESHOLD = 2; % Greater or equal to 1, integer

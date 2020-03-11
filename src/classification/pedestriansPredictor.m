@@ -5,14 +5,15 @@
 % updated_pedestrians(struct) - the updated struct of object pedestrians with predicting labels
 function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knnModel)
 for scale = 1:size(pedestrians.sliding,2)
+    disp(sprintf("Predicting sliding windows with scale %.2f",     pedestrians.sliding(scale).scale))
+
     nFrames = pedestrians.sliding(scale).nFrames;
     nRows = pedestrians.sliding(scale).nRows;
     nColumns = pedestrians.sliding(scale).nColumns;
     for frameindex = 1:nFrames
         for rowindex = 1:nRows
             for colindex = 1:nColumns
-                disp(fprintf("Features prediction of image with scale %d frame %d row %d col %d starts.", ...
-                    scale, frameindex, rowindex, colindex))
+
                 % make prediction for svm
                 label1 = ...
                     predict(svmModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);

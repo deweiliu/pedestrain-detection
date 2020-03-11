@@ -8,7 +8,7 @@
 % field: nRows - Number of rows in each image
 % field: nColumns - Number of columns in each image
 function imgs = loadimages(directory)
-    disp(fprintf("Loading images from %s\nPlease wait...", directory));
+    disp(sprintf("Loading images from %s", directory));
 
     imgs.paths = imagepaths(directory);
     imgs.number = size(imgs.paths, 1);
