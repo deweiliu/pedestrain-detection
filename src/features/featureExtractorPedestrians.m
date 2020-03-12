@@ -5,7 +5,7 @@
 function [updated_pedestrians] = featureExtractorPedestrians(pedestrians)
 % looping the scale
 for scale = 1: size(pedestrians.sliding, 2)
-    disp(sprintf("Generating features for scale %.2f",     pedestrians.sliding(scale).scale));
+    disp(sprintf("Generating features for scale %.2f", pedestrians.sliding(scale).scale));
                 
     nFrames = pedestrians.sliding(scale).nFrames;
     nRows = pedestrians.sliding(scale).nRows;

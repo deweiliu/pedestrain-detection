@@ -18,9 +18,9 @@ negatives.labels = zeros(negatives.number, 1);
 pedestrians.labels = zeros(pedestrians.number, 1) - 1;
 
 %% Pre-processing TODO
-pedestrians.images = preprocessing(pedestrians);
-positives.images = preprocessing(positives);
-negatives.images = preprocessing(negatives);
+% pedestrians.images = preprocessing(pedestrians);
+positives = preprocessing(positives);
+negatives = preprocessing(negatives);
 
 %% Feature Extraction on training set
 features = featureExtraction(positives, negatives);
