@@ -9,9 +9,9 @@ function [result] = colourHistogram(img, quantizationColors)
     b = imgQ(:,:,3); 
 
     % Get histogram values for each colour
-    redHist = imhist(r, quantizationColors);
-    greenHist = imhist(g, quantizationColors);
-    blueHist = imhist(b, quantizationColors);
+    redHist = imhist(r, quantizationColors)./numel(r);
+    greenHist = imhist(g, quantizationColors)./numel(r);
+    blueHist = imhist(b, quantizationColors)./numel(r);
     result = [redHist.', greenHist.', blueHist.'];
 end
 
