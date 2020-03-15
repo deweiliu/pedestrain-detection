@@ -1,6 +1,7 @@
 function features = featureExtraction(positives, negatives)
     FEATURES_DIRECTORY = "../dataset/features_datasets";
-    COLOUR_HISTOGRAM_FILE = "colour_histogram_feature.csv";
+    COLOUR_HISTOGRAM_RGB_FILE = "colour_histogram_rgb_feature.csv";
+    COLOUR_HISTOGRAM_HSV_FILE = "colour_histogram_hsv_feature.csv";
     HOG_FILE = "hog_feature.csv";
     
     % Set up metatable, containing labels and names of each image
@@ -44,41 +45,66 @@ function features = featureExtraction(positives, negatives)
         disp(fprintf('Finished saving HOG feature file'));
     end
     
-    % Colour Histogram
-    features.ColourHistogram = [];
-    if ~exist(sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_FILE), "file") == 0
-        disp(fprintf('Found Colour Histogram feature file, skipping generation and loading from file'));
-        features.ColourHistogram = readtable(sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_FILE));
+    % Colour Histogram RGB
+    features.ColourHistogramRGB = [];
+    if ~exist(sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_RGB_FILE), "file") == 0
+        disp(fprintf('Found Colour Histogram RGB feature file, skipping generation and loading from file'));
+        features.ColourHistogramRGB = readtable(sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_RGB_FILE));
     else
-        disp(fprintf('No Colour Histogram feature file found, generating a new one'));
+        disp(fprintf('No Colour Histogram RGB feature file found, generating a new one'));
         disp(fprintf('Generating features for positive data'));
         for i=1:length(positives.images)
             image = positives.images(:,:,:,i);
-            features.ColourHistogram = [features.ColourHistogram; colourHistogram(image, 16)];
+            features.ColourHistogramRGB = [features.ColourHistogramRGB; colourHistogramRGB(image, 16)];
         end
         disp(fprintf('Generating features for negative data'));
         for i=1:length(negatives.images)
             image = negatives.images(:,:,:,i);
-            features.ColourHistogram = [features.ColourHistogram; colourHistogram(image, 16)];
+            features.ColourHistogramRGB = [features.ColourHistogramRGB; colourHistogramRGB(image, 16)];
         end
         
         % Convert to table
-        features.ColourHistogram = array2table(features.ColourHistogram);
+        features.ColourHistogramRGB = array2table(features.ColourHistogramRGB);
         
         % Add metadata (labels and image names)
-        features.ColourHistogram = [metaTable, features.ColourHistogram];
+        features.ColourHistogramRGB = [metaTable, features.ColourHistogramRGB];
         
-        disp(fprintf('Saving Colour Histogram feature file...'));
-        writetable(features.ColourHistogram, sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_FILE));
-        disp(fprintf('Finished saving Colour Histogram feature file'));
+        disp(fprintf('Saving Colour Histogram RGB feature file...'));
+        writetable(features.ColourHistogramRGB, sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_RGB_FILE));
+        disp(fprintf('Finished saving Colour Histogram RGB feature file'));
     end
     
-    % Build combined features
-    features.Combined = join(features.HOG, features.ColourHistogram, "Keys", "Name", "KeepOneCopy", "Label");
-    
+    % Colour Histogram HSV
+    features.ColourHistogramHSV = [];
+    if ~exist(sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_HSV_FILE), "file") == 0
+        disp(fprintf('Found Colour Histogram RGB feature file, skipping generation and loading from file'));
+        features.ColourHistogramHSV = readtable(sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_HSV_FILE));
+    else
+        disp(fprintf('No Colour Histogram HSV feature file found, generating a new one'));
+        disp(fprintf('Generating features for positive data'));
+        for i=1:length(positives.images)
+            image = positives.images(:,:,:,i);
+            features.ColourHistogramHSV = [features.ColourHistogramHSV; colourHistogramHSV(image, 16)];
+        end
+        disp(fprintf('Generating features for negative data'));
+        for i=1:length(negatives.images)
+            image = negatives.images(:,:,:,i);
+            features.ColourHistogramHSV = [features.ColourHistogramHSV; colourHistogramHSV(image, 16)];
+        end
+        
+        % Convert to table
+        features.ColourHistogramHSV = array2table(features.ColourHistogramHSV);
+        
+        % Add metadata (labels and image names)
+        features.ColourHistogramHSV = [metaTable, features.ColourHistogramHSV];
+        
+        disp(fprintf('Saving Colour Histogram HSV feature file...'));
+        writetable(features.ColourHistogramHSV, sprintf("%s/%s", FEATURES_DIRECTORY, COLOUR_HISTOGRAM_HSV_FILE));
+        disp(fprintf('Finished saving Colour Histogram HSV feature file'));
+    end
+        
     % Shuffle features
     rng(3064);
-    features.Combined = features.Combined(randperm(size(features.Combined,1)),:);
     features.HOG = features.HOG(randperm(size(features.HOG,1)),:);
-    features.ColourHistogram = features.ColourHistogram(randperm(size(features.ColourHistogram,1)),:);
+    features.ColourHistogramRGB = features.ColourHistogramRGB(randperm(size(features.ColourHistogramRGB,1)),:);
 end

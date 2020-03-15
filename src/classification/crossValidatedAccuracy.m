@@ -17,7 +17,6 @@ function [result] = crossValidatedAccuracy(features, numberOfFolds)
         fprintf("Testing model for fold k=%d\n", i)
         actual = labels{test, 1};
         predicted = predict(model, featureData(test, :));
-        
         totalYesCorrect = totalYesCorrect + sum(actual == predicted & actual == 1);
         totalNoCorrect = totalNoCorrect + sum(actual == predicted & actual == 0);
         totalYes = totalYes + sum(actual == 1);

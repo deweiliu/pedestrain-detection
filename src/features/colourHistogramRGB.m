@@ -1,4 +1,4 @@
-function [result] = colourHistogram(img, quantizationColors)
+function [result] = colourHistogramRGB(img, quantizationColors)
     % Perform quantization to reduce feature count
     [imgQ, map] = rgb2ind(img, quantizationColors, 'nodither');
     imgQ = ind2rgb(imgQ, map);
@@ -10,8 +10,8 @@ function [result] = colourHistogram(img, quantizationColors)
 
     % Get histogram values for each colour
     redHist = imhist(r, quantizationColors)./numel(r);
-    greenHist = imhist(g, quantizationColors)./numel(r);
-    blueHist = imhist(b, quantizationColors)./numel(r);
+    greenHist = imhist(g, quantizationColors)./numel(g);
+    blueHist = imhist(b, quantizationColors)./numel(b);
     result = [redHist.', greenHist.', blueHist.'];
 end
 
