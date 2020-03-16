@@ -3,7 +3,7 @@
 % model(model) - the fitted model(by SVM,KNN etc.)
 %% Returns
 % updated_pedestrians(struct) - the updated struct of object pedestrians with predicting labels
-function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knnModel)
+function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knnModel, randomForestModel)
 
     for scale = 1:size(pedestrians.sliding, 2)
         disp(sprintf("Predicting sliding windows with scale %.2f", pedestrians.sliding(scale).scale))
@@ -25,6 +25,9 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knn
                     %label2 = predict(knnModel, double(pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG));
                     %label2 = cell2logical(label2);
                     %pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_KNN = label2;
+                    label3 = predict(randomForestModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
+                    label3 = cell2logical(label3);
+                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_RF = label3;
                 end
 
             end
