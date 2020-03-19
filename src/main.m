@@ -24,6 +24,12 @@ negatives = preprocessing(negatives);
 %% Processing images selection
 processingImagesSelection(positives, negatives)
 
+%% Visualize processing images
+IMAGE_INDEX = 1;
+% If parameter is positives, IMAGE_INDEX must not exceed 2003.
+% If parameter is negatives, IMAGE_INDEX must not exceed 997.
+visualizeProcessingImages(positives, IMAGE_INDEX)
+
 %% Feature Extraction on training set
 features = featureExtraction(positives, negatives);
 
@@ -60,9 +66,9 @@ pedestrians.results = informationExtraction(pedestrians, THRESHOLD, LABELLING_CO
 %% Optical Flow
 pedestrians.segmentated = segmentation(pedestrians, true);
 
-%% Visualize human images
-frame_index = 20; % It can be 1 to 100 corresponding which frame to visualize
-visualizePrediction(pedestrians, frame_index);
+%% Visualize sliding windows images which are predicted as positive
+FRAME_INDEX = 20; % It can be 1 to 100 corresponding which frame to visualize
+visualizePrediction(pedestrians, FRAME_INDEX);
 
 %% presenting the result
 % Re-run this block to rewatch the result %

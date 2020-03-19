@@ -3,9 +3,9 @@
 % frame_index(int) - the index of frames
 function [] = visualizePrediction(pedestrians, frame_index)
 
-    if exist('../dataset/human_images/', 'dir') == 0
-        disp(fprintf("path: %s does not exist.\nCreating one.", '../dataset/human_images/'));
-        mkdir('../dataset/human_images/');
+    if exist('../dataset/visualization/human_images/', 'dir') == 0
+        disp(fprintf("path: %s does not exist.\nCreating one.", '../dataset/visualization/human_images/'));
+        mkdir('../dataset/visualization/human_images/');
     end
 
     for scale = 1:size(pedestrians.sliding, 2)
@@ -28,7 +28,7 @@ function [] = visualizePrediction(pedestrians, frame_index)
                     imageName = strcat('scale_', num2str(pedestrians.sliding(scale).scale), '_frame_', num2str(frame_index), ...
                         '_img_', num2str(num), '.jpg');
 
-                    saveas(gcf, fullfile("../dataset/human_images/", imageName));
+                    saveas(gcf, fullfile("../dataset/visualization/human_images/", imageName));
                     pause(0.5);
                 end
 
@@ -36,7 +36,7 @@ function [] = visualizePrediction(pedestrians, frame_index)
 
         end
 
-        disp(sprintf("Using scale %.2f, there are %d sliding windows predicted as pedestrians in frame No. %d", pedestrians.sliding(scale).scale, num, frame_index));
+        disp(sprintf("Using scale %.2f, there are %d sliding windows predicted as pedestrians in frame No. %d", pedestrians.sliding(scale).scale, num, frame_index)); %#ok<DSPS>
     end
 
 end
