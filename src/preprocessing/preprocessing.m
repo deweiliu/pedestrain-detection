@@ -1,15 +1,14 @@
 function [processedImageStruct] = preprocessing(imageStruct)
     imageNums = size(imageStruct.images, 4);
-    
     % processing: Data augementation, generate more training item
-    % flip image vertically
+    % flip image horizontally
     images = uint8.empty;
     for index = 1:imageNums
-        processedImage = flipVertically(imageStruct.images(:,:,:,index));
+        processedImage = flipHorizontally(imageStruct.images(:,:,:,index));
         images(:, :, :, index) = processedImage;
     end
-    disp(fprintf("image augementation processing, creating flip vertically images ,%d images in total", imageNums));
-    imageStruct.processedImages.flipVerImages = images;
+    disp(fprintf("Image augementation running, creating fliping horizontally images"));
+    imageStruct.processedImages.flipHorImages = images;
 
     % processing: contrast stretch on original images
     images = uint8.empty;
@@ -17,17 +16,17 @@ function [processedImageStruct] = preprocessing(imageStruct)
         processedImage = contrastStretch(imageStruct.images(:,:,:,index));
         images(:, :, :, index) = processedImage;
     end
-    disp(fprintf("contrast stretch processing, %d images in total", imageNums));
+    disp(fprintf("Image augementation running, creating contrast enhanced images"));
     imageStruct.processedImages.contrastingImages = images;
 
     % processing: contrast stretch on flipped vertically images
     images = uint8.empty;
     for index = 1:imageNums
-        processedImage = contrastStretch(imageStruct.processedImages.flipVerImages(:,:,:,index));
+        processedImage = contrastStretch(imageStruct.processedImages.flipHorImages(:,:,:,index));
         images(:, :, :, index) = processedImage;
     end
-    disp(fprintf("contrast stretch on filped images processing, %d images in total", imageNums));
-    imageStruct.processedImages.contrastingFlipVerImages = images;
+    disp(fprintf("Image augementation running, creating contrast enhanced for fliping horizontally images"));
+    imageStruct.processedImages.contrastingFlipHorImages = images;
     
     % update the struct
     processedImageStruct = imageStruct;

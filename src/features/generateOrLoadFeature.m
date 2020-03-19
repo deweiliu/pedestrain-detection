@@ -6,13 +6,26 @@ function [result] = generateOrLoadFeature(metaTable, positives, negatives, file,
         fprintf('No "%s" feature file found, generating a new one\n', file);
         result = [];
         fprintf('Generating features for positive data\n');
+        % feature generation for positive original images
         for i=1:length(positives.images)
             image = positives.images(:,:,:,i);
             result = [result; featureFunc(image, args{:})];
         end
+        % feature generation for positive processing images
+        for i=1:length(positives.processedImages.contrastingFlipHorImages)
+            image = positives.processedImages.contrastingFlipHorImages(:,:,:,i);
+            result = [result; featureFunc(image, args{:})];
+        end
+        
         fprintf('Generating features for negative data\n');
+        % feature generation for negative original images
         for i=1:length(negatives.images)
             image = negatives.images(:,:,:,i);
+            result = [result; featureFunc(image, args{:})];
+        end
+        % feature generation for negative processing images
+        for i=1:length(negatives.processedImages.contrastingFlipHorImages)
+            image = negatives.processedImages.contrastingFlipHorImages(:,:,:,i);
             result = [result; featureFunc(image, args{:})];
         end
         
