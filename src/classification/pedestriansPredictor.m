@@ -16,7 +16,6 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knn
             for rowindex = 1:nRows
 
                 for colindex = 1:nColumns
-
                     % make prediction for svm
                     label1 = predict(svmModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
                     label1 = cell2logical(label1);
