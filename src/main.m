@@ -5,9 +5,9 @@ clear all
 close all
 
 %% Load the scripts from subfolders
-% reference https://uk.mathworks.com/matlabcentral/answers/247180-how-may-i-add-all-subfolders-in-my-matlab-path
-folder = fileparts(which(mfilename));
-addpath(genpath(folder));
+% reference https://uk.mathworks.com/help/matlab/ref/genpath.html
+paths=genpath("./");
+addpath(paths);
 
 %% Images Aquisition
 pedestrians = loadimages("../dataset/pedestrian/");

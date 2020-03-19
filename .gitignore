@@ -3,6 +3,7 @@ dataset/
 
 # Matlab cache files
 *.asv
+*.m~
 
 # Do not upload the output files
 src/output/
