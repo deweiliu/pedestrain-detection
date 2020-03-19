@@ -5,7 +5,7 @@
 %% Returns
 % model - the fitted model by KNN
 function [model] = knnTrain(features, K)
-    disp(fprintf('KNN model is training.'))
+    fprintf('KNN model is training.\n');
     % First col is the label, second col is the name
     labels = features(:,1);
     % The rest is feature info

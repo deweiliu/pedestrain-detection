@@ -7,7 +7,7 @@ function [processedImageStruct] = preprocessing(imageStruct)
         processedImage = flipHorizontally(imageStruct.images(:,:,:,index));
         images(:, :, :, index) = processedImage;
     end
-    disp(fprintf("Image augementation running, creating fliping horizontally images"));
+    fprintf("Image augementation running, creating fliping horizontally images\n");
     imageStruct.processedImages.flipHorImages = images;
 
     % processing: contrast stretch on original images
@@ -16,7 +16,7 @@ function [processedImageStruct] = preprocessing(imageStruct)
         processedImage = contrastStretch(imageStruct.images(:,:,:,index));
         images(:, :, :, index) = processedImage;
     end
-    disp(fprintf("Image augementation running, creating contrast enhanced images"));
+    fprintf("Image augementation running, creating contrast enhanced images\n");
     imageStruct.processedImages.contrastingImages = images;
 
     % processing: contrast stretch on flipped vertically images
@@ -25,7 +25,7 @@ function [processedImageStruct] = preprocessing(imageStruct)
         processedImage = contrastStretch(imageStruct.processedImages.flipHorImages(:,:,:,index));
         images(:, :, :, index) = processedImage;
     end
-    disp(fprintf("Image augementation running, creating contrast enhanced for fliping horizontally images"));
+    fprintf("Image augementation running, creating contrast enhanced for fliping horizontally images\n");
     imageStruct.processedImages.contrastingFlipHorImages = images;
     
     % update the struct

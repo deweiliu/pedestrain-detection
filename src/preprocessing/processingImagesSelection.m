@@ -29,7 +29,7 @@ end
 features = [[posLabels; posLabels;posLabels;posLabels;negLabels;negLabels;negLabels;negLabels],features];
 
 % only ori images
-disp(fprintf("%d original training images", sampleSize))
+fprintf("%d original training images\n", sampleSize);
 selectFeatures = [features([1:sampleSize,sampleSize*4+1:sampleSize*5],1),...
     features([1:sampleSize,sampleSize*4+1:sampleSize*5],2:end)];
 rng(3064)
@@ -38,7 +38,7 @@ model = fitcsvm(selectFeatures(:,2:end), selectFeatures(:,1), 'KernelFunction', 
 svmTest(model)
 
 % ori + contrast enhanced
-disp(fprintf("%d original training images + %d contrast enhanced images", sampleSize, sampleSize))
+fprintf("%d original training images + %d contrast enhanced images\n", sampleSize, sampleSize);
 selectFeatures = [features([1:sampleSize,sampleSize+1:sampleSize*2,sampleSize*4+1:sampleSize*5,sampleSize*5+1:sampleSize*6],1),...
     features([1:sampleSize,sampleSize+1:sampleSize*2,sampleSize*4+1:sampleSize*5,sampleSize*5+1:sampleSize*6],2:end)];
 rng(3064)
@@ -47,7 +47,7 @@ model = fitcsvm(selectFeatures(:,2:end), selectFeatures(:,1), 'KernelFunction', 
 svmTest(model)
 
 % ori + flip hor
-disp(fprintf("%d original training images + %d flip horizontally images", sampleSize, sampleSize))
+fprintf("%d original training images + %d flip horizontally images\n", sampleSize, sampleSize);
 selectFeatures = [features([1:sampleSize,sampleSize*2+1:sampleSize*3,sampleSize*4+1:sampleSize*5,sampleSize*6+1:sampleSize*7],1),...
     features([1:sampleSize,sampleSize*2+1:sampleSize*3,sampleSize*4+1:sampleSize*5,sampleSize*6+1:sampleSize*7],2:end)];
 rng(3064)
@@ -56,7 +56,7 @@ model = fitcsvm(selectFeatures(:,2:end), selectFeatures(:,1), 'KernelFunction', 
 svmTest(model)
 
 % ori + contrast enhanced and flip hor
-disp(fprintf("%d original training images + %d contrast enhanced and flip horizontally images", sampleSize, sampleSize))
+fprintf("%d original training images + %d contrast enhanced and flip horizontally images\n", sampleSize, sampleSize);
 selectFeatures = [features([1:sampleSize,sampleSize*3+1:sampleSize*4,sampleSize*4+1:sampleSize*5,sampleSize*7+1:sampleSize*8],1),...
     features([1:sampleSize,sampleSize*3+1:sampleSize*4,sampleSize*4+1:sampleSize*5,sampleSize*7+1:sampleSize*8],2:end)];
 rng(3064)

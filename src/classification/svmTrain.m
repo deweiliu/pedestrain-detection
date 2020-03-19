@@ -5,7 +5,7 @@
 %% Returns
 % model - the fitted model by svm
 function [model] = svmTrain(features)
-    disp(fprintf('SVM model is training.'))
+    fprintf('SVM model is training.\n');
     % first col is the label, second col is the name
     labels = features(:,1);
     % the rest is feature info

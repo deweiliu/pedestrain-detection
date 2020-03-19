@@ -4,7 +4,7 @@
 function [] = visualizePrediction(pedestrians, frame_index)
 
     if exist('../dataset/visualization/human_images/', 'dir') == 0
-        disp(fprintf("path: %s does not exist.\nCreating one.", '../dataset/visualization/human_images/'));
+        fprintf("path: %s does not exist.\nCreating one\n", '../dataset/visualization/human_images/');
         mkdir('../dataset/visualization/human_images/');
     end
 

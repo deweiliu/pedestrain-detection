@@ -14,7 +14,7 @@ function features = featureExtraction(positives, negatives)
         
     % Check the existance of features files folder
     if exist(FEATURES_DIRECTORY,'dir') == 0
-        disp(fprintf("path: %s does not exist.\nCreating one.", FEATURES_DIRECTORY));
+        fprintf("path: %s does not exist.\nCreating one.\n", FEATURES_DIRECTORY);
         mkdir(FEATURES_DIRECTORY); 
     end
     

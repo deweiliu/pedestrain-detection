@@ -27,7 +27,7 @@ function slidingWindowsList = slidingwindows(pedestrians, slidingWidth, slidingH
     for scaleIndex = 1:length(scales)
         scale = scales(scaleIndex);
 
-        disp(fprintf("Generating sliding windows for scale = %.2f, gap = %.0f%%\nPlease wait...", scale, gapPercentage * 100));
+        fprintf("Generating sliding windows for scale = %.2f, gap = %.0f%%\n", scale, gapPercentage * 100);
 
         slidingWindowsPerVideo = slidingWindowsVideo(frames, slidingWidth, slidingHeight, scale, gapPercentage);
         slidingWindowsList = [slidingWindowsList, slidingWindowsPerVideo];
