@@ -3,9 +3,9 @@
 % FPS (integer) - frame per second
 % pedestrians(struct) - containing the results and the original video
 function presentation(pedestrians, FPS)
-    results = pedestrians.results;
+    LCSResult = pedestrians.results.LCS;
     nFrames = pedestrians.number;
-    nResults = size(results, 1);
+    nResults = size(LCSResult, 1);
     nRows = 1 + nResults;
     nColumns = 4;
 
@@ -24,7 +24,7 @@ function presentation(pedestrians, FPS)
         % Display result(s)
         for resultIndex = 1:nResults
             plotIndex = resultIndex * nColumns + 1;
-            presentResult(results(resultIndex), frameIndex, nRows, nColumns, plotIndex);
+            presentResult(LCSResult(resultIndex), frameIndex, nRows, nColumns, plotIndex);
 
         end
 

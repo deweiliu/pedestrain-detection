@@ -21,13 +21,16 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knn
                     label1 = predict(svmModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
                     label1 = cell2logical(label1);
                     pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_SVM = label1;
+
                     % make prediction for knn
                     %label2 = predict(knnModel, double(pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG));
                     %label2 = cell2logical(label2);
                     %pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_KNN = label2;
-                    label3 = predict(randomForestModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
-                    label3 = cell2logical(label3);
-                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_RF = label3;
+
+                    % make prediction for random forest
+                    %label3 = predict(randomForestModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
+                    %label3 = cell2logical(label3);
+                    %pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_RF = label3;
                 end
 
             end
