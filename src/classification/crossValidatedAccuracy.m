@@ -1,4 +1,4 @@
-function [result] = crossValidatedAccuracy(features, numberOfFolds)
+function [result] = crossValidatedAccuracy(trainer, features, numberOfFolds)
     fprintf("Running cross validation for accuracy with %d folds\n", numberOfFolds)
     % first col is the label, second col is the name
     labels = features(:,1);
@@ -13,15 +13,16 @@ function [result] = crossValidatedAccuracy(features, numberOfFolds)
         fprintf("Building model for fold k=%d\n", i)
         test = (indices == i);
         train = ~test;
-        model = svmTrain(features(train, :));
+        model = trainer(features(train, :));
+        
         fprintf("Testing model for fold k=%d\n", i)
         actual = labels{test, 1};
         predicted = predict(model, featureData(test, :));
+        
         totalYesCorrect = totalYesCorrect + sum(actual == predicted & actual == 1);
         totalNoCorrect = totalNoCorrect + sum(actual == predicted & actual == 0);
         totalYes = totalYes + sum(actual == 1);
         totalNo = totalNo + sum(actual == 0);
-        
     end
     totalYesIncorrect = totalYes - totalYesCorrect;
     totalNoIncorrect = totalNo - totalNoCorrect;

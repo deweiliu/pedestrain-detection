@@ -1,9 +1,11 @@
-function [result] = generateOrLoadFeature(metaTable, positives, negatives, file, featureFunc, args)
-    if ~exist(file, "file") == 0
+function [result] = generateOrLoadFeature(fileLoad, metaTable, positives, negatives, file, featureFunc, args)
+    if fileLoad == true && ~exist(file, "file") == 0
         fprintf('Found "%s" feature file, skipping generation and loading from file\n', file);
         result = readtable(file);
     else
-        fprintf('No "%s" feature file found, generating a new one\n', file);
+        if fileLoad == true
+            fprintf('No "%s" feature file found, generating a new one\n', file);
+        end
         result = [];
         fprintf('Generating features for positive data\n');
         % feature generation for positive original images
@@ -35,9 +37,11 @@ function [result] = generateOrLoadFeature(metaTable, positives, negatives, file,
         % Add metadata (labels and image names)
         result = [metaTable, result];
         
-        fprintf('Saving feature file...\n');
-        writetable(result, file);
-        fprintf('Finished saving "%s" feature file\n', file);
+        if fileLoad == true
+            fprintf('Saving feature file...\n');
+            writetable(result, file);
+            fprintf('Finished saving "%s" feature file\n', file);
+        end
     end
 end
 
