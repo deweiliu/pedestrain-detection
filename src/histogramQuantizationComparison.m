@@ -42,7 +42,7 @@ for i=1:MAX_QUANTIZATION_VALUE
         negatives, "", @colourHistogramRGB, {i});
     accuracy = crossValidatedAccuracy(@svmTrain, features, 5);
     totalCorrect = accuracy{1,1} + accuracy{2,2};
-    total = totalCorrect + accuracy{1,1} + accuracy{2,1};
+    total = totalCorrect + accuracy{1,2} + accuracy{2,1};
     rgbErrorRate = [rgbErrorRate;[i, 1 - totalCorrect/total]];
 end
 
@@ -56,7 +56,7 @@ for i=1:MAX_QUANTIZATION_VALUE
         negatives, "", @colourHistogramHSV, {i});
     accuracy = crossValidatedAccuracy(@svmTrain, features, 5);
     totalCorrect = accuracy{1,1} + accuracy{2,2};
-    total = totalCorrect + accuracy{1,1} + accuracy{2,1};
+    total = totalCorrect + accuracy{1,2} + accuracy{2,1};
     hsvErrorRate = [hsvErrorRate;[i, 1 - totalCorrect/total]];
 end
 

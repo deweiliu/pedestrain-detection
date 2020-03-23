@@ -8,7 +8,7 @@ function features = featureExtraction(positives, negatives)
     % Set up metatable, containing labels and names of each image
     metaTable = array2table([...
         [positives.labels;positives.labels;negatives.labels;negatives.labels], ...
-        [positives.paths;positives.paths;negatives.paths;negatives.paths] ...
+        [positives.paths;strcat(positives.paths, "aug");negatives.paths;strcat(negatives.paths, "aug")] ...
     ], "VariableNames", ["Label", "Name"]);
     metaTable.Label = str2double(metaTable.Label);
         
@@ -32,7 +32,7 @@ function features = featureExtraction(positives, negatives)
     
     % Raw Data
     features.RawData = generateOrLoadFeature(true, metaTable, positives, negatives, ...
-        sprintf("%s/%s", FEATURES_DIRECTORY, RAW_DATA_FILE),@rawData, {[32,32]});
+        sprintf("%s/%s", FEATURES_DIRECTORY, RAW_DATA_FILE),@rawData, {[16,16]});
         
     % Shuffle features
     rng(3064);

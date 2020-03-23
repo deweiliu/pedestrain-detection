@@ -41,7 +41,7 @@ for i=1:MAX_IMAGE_SIZE
         negatives, "", @rawData, {[i, i]});
     accuracy = crossValidatedAccuracy(@svmTrain, features, 5);
     totalCorrect = accuracy{1,1} + accuracy{2,2};
-    total = totalCorrect + accuracy{1,1} + accuracy{2,1};
+    total = totalCorrect + accuracy{1,2} + accuracy{2,1};
     rawDataErrorRate = [rawDataErrorRate;[i, 1 - totalCorrect/total]];
 end
 
