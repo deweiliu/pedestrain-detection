@@ -8,6 +8,8 @@ function LCS = lowCoverageSuppression(pedestrians, threshold, connectivity, meth
         result.labels = labelling(result.slidingCounting, threshold, connectivity, frameIndex);
         [result.boundings, result.data] = boundingBox(result.labels, pedestrians, frameIndex);
         result.frameIndex = frameIndex;
+        result.framePath = pedestrians.paths(frameIndex);
+
         LCS = [LCS; result];
     end
 

@@ -6,7 +6,7 @@ dataset/
 *.m~
 
 # Do not upload the output files
-src/output/
+output/
 
 # Testing scripts
 *_test*.m
