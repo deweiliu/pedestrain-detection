@@ -10,9 +10,7 @@ addpath(paths);
 %% Create output directory
 output = "../output";
 
-if exist(output, 'dir') == 0
-    mkdir(output);
-end
+makedir(output);
 
 %% Images Aquisition
 pedestrians = loadimages("../dataset/pedestrian/");
