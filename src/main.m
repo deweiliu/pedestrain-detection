@@ -55,9 +55,6 @@ THRESHOLD = 2; % Greater or equal to 1, integer
 LABELLING_CONNECTIVITY = 4; % 8 or 4  # See https://uk.mathworks.com/help/images/ref/bwlabel.html
 pedestrians.results = informationExtraction(pedestrians, THRESHOLD, LABELLING_CONNECTIVITY);
 
-%% Optical Flow
-pedestrians.segmentated = segmentation(pedestrians, true);
-
 %% Visualize sliding windows images which are predicted as positive
 FRAME_INDEX = 20; % It can be 1 to 100 corresponding which frame to visualize
 visualizePrediction(pedestrians, FRAME_INDEX);

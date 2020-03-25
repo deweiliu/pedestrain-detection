@@ -7,7 +7,7 @@
 % * |pedestrians| :   Object returned by image_aquisition.loadimages()
 % * |pedestrians| :   true of false, indicating if the segmentation result is displayed
 %
-function segmentated = segmentation(pedestrians, isDisplay)
+function pedestrianOpticalFlow(pedestrians, FRAME_PER_SECOND)
 
     % Threshold for flow vector to detect movement
     THRESHOLD = 0.1;
@@ -71,19 +71,14 @@ function segmentated = segmentation(pedestrians, isDisplay)
 
         segmentated(:, :, frameNo) = images{SEG_PARA + 2}.frame;
         % display
-        if nargin < 2
-            isDisplay = false;
-        end
 
-        if isDisplay
-            display(images, frameNo);
-        end
+        display(images, frameNo, FRAME_PER_SECOND);
 
     end
 
 end
 
-function display(images, frameNo)
+function display(images, frameNo, FRAME_PER_SECOND)
     figure(1);
     rows = 2;
     columns = 3;
@@ -106,5 +101,5 @@ function display(images, frameNo)
 
     end
 
-    pause(0.1);
+    pause(1 / FRAME_PER_SECOND);
 end
