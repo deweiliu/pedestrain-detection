@@ -1,9 +1,14 @@
-function LCS = lowCoverageSuppression(pedestrians, threshold, connectivity,method)
+function LCS = lowCoverageSuppression(pedestrians, threshold, connectivity, method)
 
-    LCS.method = method;
-    LCS.slidingCounting = highlightSliding(pedestrians, method);
-    LCS.labels = labelling(result.slidingCounting, threshold, connectivity);
-    LCS.boundings = boundingBox(result.labels, pedestrians);
+    LCS = [];
 
+    for frameIndex = 1:pedestrians.number
+        result.method = method;
+        result.slidingCounting = highlightSliding(pedestrians, method, frameIndex);
+        result.labels = labelling(result.slidingCounting, threshold, connectivity, frameIndex);
+        [result.boundings, result.data] = boundingBox(result.labels, pedestrians, frameIndex);
+        result.frameIndex = frameIndex;
+        LCS = [LCS; result];
+    end
 
 end

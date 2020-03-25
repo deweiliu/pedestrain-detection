@@ -1,11 +1,6 @@
-function boundings = boundingBox(labelledImages, pedestrians)
-    nFrames = pedestrians.number;
-    boundings = [];
+function [bounding, data] = boundingBox(labelledImages, pedestrians, frameIndex)
 
-    for frameIndex = 1:nFrames
-        originImage = pedestrians.images(:, :, :, frameIndex);
-        bounding = boundingBoxPerFrame(labelledImages(frameIndex), originImage);
-        boundings = [boundings; bounding];
-    end
+    originImage = pedestrians.images(:, :, :, frameIndex);
+    [bounding, data] = boundingBoxPerFrame(labelledImages, originImage);
 
 end

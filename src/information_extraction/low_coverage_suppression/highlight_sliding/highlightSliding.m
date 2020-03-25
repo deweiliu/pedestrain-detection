@@ -13,21 +13,16 @@
 % field - title(string) - the title text of the image
 % field - frameIndex(integer) - the index of current frame
 % field - image(2-D matrix) - displayable image of current frame
-function slidingCounts = highlightSliding(pedestrians, method)
-    slidingCounts = [];
+function highlightedImage = highlightSliding(pedestrians, method, frameIndex)
 
-    for frameIndex = 1:pedestrians.number
-        counts = highlightSlidingPerFrame(pedestrians, frameIndex, method);
-        maxCount = max(max(counts));
+    counts = highlightSlidingPerFrame(pedestrians, frameIndex, method);
+    maxCount = max(max(counts));
 
-        highlightedImage.frameIndex = frameIndex;
-        highlightedImage.title = sprintf("MAX(number of sliding windows convered, per pixel) = %d", maxCount);
-        % reference https://uk.mathworks.com/help/images/ref/stretchlim.html
-        highlightedImage.image = imadjust(counts, stretchlim(counts, 0), []);
-        highlightedImage.counts = counts;
-        highlightedImage.maxCount = maxCount;
-
-        slidingCounts = [slidingCounts; highlightedImage];
-    end
+    highlightedImage.frameIndex = frameIndex;
+    highlightedImage.title = sprintf("MAX(number of sliding windows convered, per pixel) = %d", maxCount);
+    % reference https://uk.mathworks.com/help/images/ref/stretchlim.html
+    highlightedImage.image = imadjust(counts, stretchlim(counts, 0), []);
+    highlightedImage.counts = counts;
+    highlightedImage.maxCount = maxCount;
 
 end

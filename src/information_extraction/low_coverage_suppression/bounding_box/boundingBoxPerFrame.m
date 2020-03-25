@@ -1,4 +1,4 @@
-function bounding = boundingBoxPerFrame(labelledImage, originImage)
+function [bounding, data] = boundingBoxPerFrame(labelledImage, originImage)
     boxes = [];
     image = originImage;
 
@@ -27,5 +27,6 @@ function bounding = boundingBoxPerFrame(labelledImage, originImage)
     bounding.image = image;
     bounding.number = labelledImage.number;
     bounding.boxes = boxes;
+    data = boxes;
 
 end
