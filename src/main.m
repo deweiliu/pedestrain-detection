@@ -6,8 +6,15 @@ close all
 
 %% Load the scripts from subfolders
 % reference https://uk.mathworks.com/help/matlab/ref/genpath.html
-paths=genpath("./");
+paths = genpath("./");
 addpath(paths);
+
+%% Create output directory
+output = "../output";
+
+if exist(output, 'dir') == 0
+    mkdir(output);
+end
 
 %% Images Aquisition
 pedestrians = loadimages("../dataset/pedestrian/");
@@ -17,7 +24,7 @@ positives.labels = ones(positives.number, 1);
 negatives.labels = zeros(negatives.number, 1);
 pedestrians.labels = zeros(pedestrians.number, 1) - 1;
 
-%% Training images Pre-processing 
+%% Training images Pre-processing
 positives = preprocessing(positives);
 negatives = preprocessing(negatives);
 
@@ -62,7 +69,7 @@ pedestrians.sliding = slidingwindows(pedestrians, SLIDING_WIDTH, SLIDING_HEIGHT,
 pedestrians = featureExtractorPedestrians(pedestrians);
 
 %% Making prediction on all testing images by fitted model (SVM KNN)
-pedestrians = pedestriansPredictor(pedestrians, svmModel, knnModel, randomForestModel);
+pedestrians = pedestriansPredictor(pedestrians, svmModel);
 
 %% Extract information of pedestrians
 THRESHOLD = 2; % Greater or equal to 1, integer
@@ -76,7 +83,7 @@ pedestrians.segmentated = segmentation(pedestrians, true);
 FRAME_INDEX = 20; % It can be 1 to 100 corresponding which frame to visualize
 visualizePrediction(pedestrians, FRAME_INDEX);
 
-%% presenting the result
-% Re-run this block to rewatch the result %
+%% present the result
+% Re-run this block to redisplay the result
 FRAME_PER_SECOND = 5;
 presentation(pedestrians, FRAME_PER_SECOND);
