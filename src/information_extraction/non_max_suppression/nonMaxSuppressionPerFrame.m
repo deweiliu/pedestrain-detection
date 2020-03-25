@@ -1,4 +1,4 @@
-function [image, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, frameIndex)
+function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, frameIndex)
     newPedestrian = true;
     image = pedestrians.images(:, :, :, frameIndex);
     sliding = pedestrians.sliding;
@@ -25,6 +25,8 @@ function [image, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, frame
 
     end
 
+    NMSImage.image = image;
+    NMSImage.title = sprintf("%d Pedestrians", size(data));
 end
 
 function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameIndex)

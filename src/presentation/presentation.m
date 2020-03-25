@@ -18,11 +18,17 @@ function presentation(pedestrians, FPS)
         pause(1 / FPS);
 
         % Display original image
-        presentOriginal(pedestrians.images, frameIndex, nRows, nColumns);
+        plotIndex = 1;
+        presentOriginal(pedestrians.images, frameIndex, nRows, nColumns,plotIndex);
 
         % Display LCS
-        plotIndex = nColumns + 1;
+        plotIndex = nColumns + plotIndex;
         presentLCS(LCS(frameIndex), nRows, nColumns, plotIndex);
+
+        % Display NMS
+        plotIndex = nColumns + plotIndex;
+        presentNMS(NMS(frameIndex), nRows, nColumns, plotIndex);
+
 
     end
 
