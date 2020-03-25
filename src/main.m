@@ -80,8 +80,3 @@ visualizePrediction(pedestrians, FRAME_INDEX);
 % Re-run this block to rewatch the result %
 FRAME_PER_SECOND = 5;
 presentation(pedestrians, FRAME_PER_SECOND);
-%% present NMS
-for frameIndex=1:100
-    imshow(pedestrians.results.NMS(:,:,:,frameIndex));
-    pause(1);
-end
