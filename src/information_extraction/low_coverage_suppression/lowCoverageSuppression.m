@@ -1,18 +1,9 @@
-function results = lowCoverageSuppression(pedestrians, threshold, connectivity,classifiers)
+function LCS = lowCoverageSuppression(pedestrians, threshold, connectivity,method)
 
-    results = [];
-    % For each method
-    for methodIndex = 1:size(classifiers, 1)
+    LCS.method = method;
+    LCS.slidingCounting = highlightSliding(pedestrians, method);
+    LCS.labels = labelling(result.slidingCounting, threshold, connectivity);
+    LCS.boundings = boundingBox(result.labels, pedestrians);
 
-        % Calculate the images
-        method = classifiers(methodIndex);
-
-        result.method = method;
-        result.slidingCounting = highlightSliding(pedestrians, method);
-        result.labels = labelling(result.slidingCounting, threshold, connectivity);
-        result.boundings = boundingBox(result.labels, pedestrians);
-
-        results = [results; result];
-    end
 
 end
