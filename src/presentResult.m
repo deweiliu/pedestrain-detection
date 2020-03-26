@@ -1,5 +1,5 @@
 %% Clear the console and environment
-clear all
+clear result
 close all
 
 %% Load the scripts from subfolders
