@@ -1,7 +1,7 @@
 function results = informationExtraction(pedestrians, threshold, connectivity)
 
-    method = "label_HOG_SVM";
-    results.LCS = lowCoverageSuppression(pedestrians, threshold, connectivity, method);
+    labelName = "label";
+    results.LCS = lowCoverageSuppression(pedestrians, threshold, connectivity, labelName);
 
-    results.NMS = nonMaxSuppression(pedestrians);
+    results.NMS = nonMaxSuppression(pedestrians,labelName);
 end

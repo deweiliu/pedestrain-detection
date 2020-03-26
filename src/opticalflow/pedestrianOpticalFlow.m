@@ -4,7 +4,7 @@
 %% Segmentation function
 % Given image object
 % Return binary images indicating the optical flow in each image
-% * |pedestrians| :   Object returned by image_aquisition.loadimages()
+% * |pedestrians| :   Object returned by image_aquisition.loadImages()
 % * |pedestrians| :   true of false, indicating if the segmentation result is displayed
 %
 function pedestrianOpticalFlow(pedestrians, FRAME_PER_SECOND)

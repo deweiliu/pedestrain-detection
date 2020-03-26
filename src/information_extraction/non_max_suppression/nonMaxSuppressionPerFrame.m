@@ -1,4 +1,4 @@
-function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, frameIndex)
+function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, frameIndex,labelName)
     newPedestrian = true;
     image = pedestrians.images(:, :, :, frameIndex);
     sliding = pedestrians.sliding;
@@ -6,13 +6,13 @@ function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, fr
 
     while newPedestrian
 
-        [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameIndex);
+        [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameIndex,labelName);
 
         if scaleIndex == 0
             newPedestrian = false;
         else
             target = sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex);
-            sliding = removePedestrian(sliding, frameIndex, target);
+            sliding = removePedestrian(sliding, frameIndex, target,labelName);
             box.x = target.x;
             box.y = target.y;
             box.width = target.width;
@@ -29,7 +29,7 @@ function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, fr
     NMSImage.title = sprintf("%d Pedestrians", size(data));
 end
 
-function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameIndex)
+function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameIndex,labelName)
     nScale = size(sliding, 2);
 
     for scaleIndex = 1:nScale
@@ -40,7 +40,7 @@ function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameInde
 
             for columnIndex = 1:nColumns
 
-                if sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex).label_HOG_SVM == true
+                if sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex).(labelName) == true
                     return;
                 end
 
@@ -54,7 +54,7 @@ function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameInde
 
 end
 
-function [sliding] = removePedestrian(sliding, frameIndex, target)
+function [sliding] = removePedestrian(sliding, frameIndex, target,labelName)
     nScale = size(sliding, 2);
 
     for scaleIndex = 1:nScale
@@ -66,10 +66,10 @@ function [sliding] = removePedestrian(sliding, frameIndex, target)
             for columnIndex = 1:nColumns
                 window = sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex);
 
-                if window.label_HOG_SVM == true
+                if window.(labelName) == true
 
                     if isSamePedestrian(target, window)
-                        sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex).label_HOG_SVM = false;
+                        sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex).(labelName) = false;
                     end
 
                 end
