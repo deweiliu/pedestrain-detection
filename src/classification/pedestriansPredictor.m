@@ -17,7 +17,7 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, model, scoreM
                     [label,postProbs] = predict(scoreModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
                     label = cell2logical(label);
                     pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_SVM = label;
-                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).PostProbs = postProbs;
+                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).PostProbs = postProbs(:,2);
                 end
             end
         end
