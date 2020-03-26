@@ -19,6 +19,7 @@ function [] = visualizePrediction(pedestrians, frame_index)
             for colindex = 1:nCols
 
                 if pedestrians.sliding(scale).windows(rowindex, colindex, frame_index).label_HOG_SVM == 1
+                    disp(pedestrians.sliding(scale).windows(rowindex, colindex, frame_index).PostProbs)
                     num = num + 1;
                     % display all images which are predicted as human image
                     image = pedestrians.sliding(scale).windows(rowindex, colindex, frame_index).image;

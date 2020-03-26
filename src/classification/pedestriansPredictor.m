@@ -3,10 +3,10 @@
 % model(model) - the fitted model(SVM)
 %% Returns
 % updated_pedestrians(struct) - the updated struct of object pedestrians with predicting labels
-function [updated_pedestrians] = pedestriansPredictor(pedestrians, model)
-
+function [updated_pedestrians] = pedestriansPredictor(pedestrians, model, scoreModel)
     for scale = 1:size(pedestrians.sliding, 2)
-        fprintf("Predicting sliding windows with scale %.2f", pedestrians.sliding(scale).scale)
+        tic
+        fprintf("Predicting sliding windows with scale %.2f\n", pedestrians.sliding(scale).scale)
         nFrames = pedestrians.sliding(scale).nFrames;
         nRows = pedestrians.sliding(scale).nRows;
         nColumns = pedestrians.sliding(scale).nColumns;
@@ -14,17 +14,14 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, model)
             for rowindex = 1:nRows
                 for colindex = 1:nColumns
                     % make prediction for svm
-                    label = predict(model, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
+                    [label,postProbs] = predict(scoreModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
                     label = cell2logical(label);
                     pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_SVM = label;
-                    % TODO 
-                    % to get the score/probability
-                    % https://uk.mathworks.com/help/stats/classreg.learning.classif.compactclassificationsvm.predict.html
-                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label = label;
-%                     pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).score = score;
+                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).PostProbs = postProbs;
                 end
             end
         end
+        toc
     end
     % update the pedestrians struct
     updated_pedestrians = pedestrians;

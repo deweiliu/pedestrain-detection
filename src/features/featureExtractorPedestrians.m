@@ -5,15 +5,14 @@
 function [updated_pedestrians] = featureExtractorPedestrians(pedestrians)
 % looping the scale
 for scale = 1: size(pedestrians.sliding, 2)
-    disp(sprintf("Generating features for scale %.2f", pedestrians.sliding(scale).scale));
-                
+    tic
+    fprintf("Generating features for scale %.2f\n", pedestrians.sliding(scale).scale);
     nFrames = pedestrians.sliding(scale).nFrames;
     nRows = pedestrians.sliding(scale).nRows;
     nColumns = pedestrians.sliding(scale).nColumns;
     for frameindex = 1: nFrames
         for rowindex = 1:nRows
             for colindex = 1:nColumns
-
                 pedestrians_each = pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).image;
                 % resize the image as 160 * 96
                 resize_sub_testimage = imresize(pedestrians_each, [160, 96]);
@@ -23,6 +22,7 @@ for scale = 1: size(pedestrians.sliding, 2)
             end
         end
     end
+    toc
 end
 % update the pedestrians struct
 updated_pedestrians = pedestrians;
