@@ -19,7 +19,7 @@ features = featureExtraction(positives, negatives);
 %% train svm model
 svmModel = svmTrain(features.HOG);
 % compactSvmModel = compact(svmModel);
-scoreSvmModel = fitPosterior(svmModel, features.HOG(:,3:end), features.HOG(:,1));
+scoreSvmModel = fitPosterior(svmModel);
 
 %% Sliding windows
 SLIDING_WIDTH = positives.nColumns;
