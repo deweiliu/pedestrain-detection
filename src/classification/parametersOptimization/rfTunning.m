@@ -1,6 +1,6 @@
 function rfFigure = rfTunning(features, labels)
     dependentValues = table2array(features);
-    labels = table2array(labels);
+
     model = TreeBagger(60, dependentValues, labels, 'OOBPrediction', 'On', 'Method', 'classification');
 
     rfFigure = figure(1);

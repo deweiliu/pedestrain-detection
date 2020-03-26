@@ -3,7 +3,7 @@
 %% Set up Environment
 setupEnvir;
 %% parameters
-OUTPUT_DIR=fullfile(output,"classifier_comparison");
+OUTPUT_DIR = fullfile(output, "classifier_comparison");
 
 makedir(OUTPUT_DIR);
 
@@ -12,10 +12,24 @@ positives = preprocessing(positives);
 negatives = preprocessing(negatives);
 
 %% Feature Extraction on training set
-features = featureExtraction(positives, negatives);
+allFeatures = featureExtraction(positives, negatives);
+features = allFeatures.HOG(:, 3:end);
+labels = allFeatures.HOG(:, 1);
+labels = logical(tableToArray(labels));
 
-%% Parameter optimization on random forest model
-rfFigure = rfTunning(features.HOG(:, 3:end), features.HOG(:, 1));
-filePath=fullfile(OUTPUT_DIR, 'rfParaTuning.svg');
+%% random forest model
+% Tunning parameter
+rfFigure = rfTunning(features, labels);
+filePath = fullfile(OUTPUT_DIR, 'random_forest_param_tunning.svg');
 saveas(rfFigure, filePath);
-fprintf("RF graph saved at %s",filePath);
+fprintf("RF graph saved at %s\n", filePath);
+
+% Testing model
+OPTIMISED_NUM_TREES = 30;
+rfModel = randomForestTrain(features, labels, OPTIMISED_NUM_TREES);
+predictions = rfTest(rfModel);
+rfConfusion = confusionchart(labels, predictions);
+title("Random Forest Confusion Matrix");
+filePath = fullfile(OUTPUT_DIR, 'random_forest_confusion_matrix.svg');
+saveas(rfConfusion, filePath);
+fprintf("RF confusion matrix saved at %s\n", filePath);
