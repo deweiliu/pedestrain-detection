@@ -1,5 +1,5 @@
 %% Given a directory, returns the paths of images in this directory
-function paths = imagepaths(directory)
+function paths = imagePaths(directory)
     % reference https://uk.mathworks.com/help/matlab/ref/dir.html
     images = dir(directory);
     paths = [];

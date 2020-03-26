@@ -7,12 +7,12 @@
 % field: grayImages - 3D array, grayImages(:,:,index) returns a grayscale image
 % field: nRows - Number of rows in each image
 % field: nColumns - Number of columns in each image
-function imgs = loadimages(directory)
+function imgs = loadImages(directory)
     disp(sprintf("Loading images from %s", directory));
 
-    imgs.paths = imagepaths(directory);
+    imgs.paths = imagePaths(directory);
     imgs.number = size(imgs.paths, 1);
-    imgs.images = readimages(imgs.paths, imgs.number);
+    imgs.images = readImages(imgs.paths, imgs.number);
     imgs.grayImages = colour2gray(imgs.images, imgs.number);
     imgs.nRows = size(imgs.grayImages(:, :, 1), 1);
     imgs.nColumns = size(imgs.grayImages(:, :, 1), 2);

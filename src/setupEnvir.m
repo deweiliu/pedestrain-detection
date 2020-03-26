@@ -13,9 +13,9 @@ output = "../output";
 makedir(output);
 
 %% Images Aquisition
-pedestrians = loadimages("../dataset/pedestrian/");
-positives = loadimages("../dataset/images/pos/");
-negatives = loadimages("../dataset/images/neg/");
+pedestrians = loadImages("../dataset/pedestrian/");
+positives = loadImages("../dataset/images/pos/");
+negatives = loadImages("../dataset/images/neg/");
 positives.labels = ones(positives.number, 1);
 negatives.labels = zeros(negatives.number, 1);
 pedestrians.labels = zeros(pedestrians.number, 1) - 1;

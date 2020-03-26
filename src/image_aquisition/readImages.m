@@ -1,5 +1,5 @@
 %% Given paths of images, read them
-function images = readimages(paths, size)
+function images = readImages(paths, size)
     images = uint8.empty;
 
     for index = 1:size
