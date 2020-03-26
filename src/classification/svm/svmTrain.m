@@ -10,7 +10,6 @@ function [model] = svmTrain(features)
     labels = features(:,1);
     % the rest is feature info
     featureData = features(:,3:end);
-    rng(3064)
-    model = fitcsvm(featureData, labels,'Standardize',true,'KernelFunction','polynomial',...
-    'KernelScale','auto');
+    model = fitcsvm(featureData, labels, 'KernelFunction','linear',...
+        'BoxConstraint',1.2541, 'KernelScale', 0.3364);
 end

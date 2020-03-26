@@ -9,7 +9,6 @@ addpath(paths);
 
 %% Create output directory
 output = "../output";
-
 makedir(output);
 
 %% Images Aquisition
