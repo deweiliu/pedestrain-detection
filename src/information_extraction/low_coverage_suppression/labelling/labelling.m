@@ -20,7 +20,7 @@ function labelledImage = labelling(slidingCounts, threshold, connectivity, frame
     number = max(max(labels));
 
     labelledImage.frameIndex = frameIndex;
-    labelledImage.title = sprintf("Counting threshold = %d", threshold);
+    labelledImage.title = sprintf("LCS: Counting threshold = %d", threshold);
     labelledImage.image = label2rgb(labels, "spring", "black");
     labelledImage.number = number;
     labelledImage.labels = labels;

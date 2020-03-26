@@ -36,13 +36,12 @@ labelName = "label_HOG_SVM"; % The label to use in prediction
 pedestrians = pedestriansPredictor(pedestrians, scoreSvmModel, labelName);
 
 %% Extract information of pedestrians
-pedestrians.results = informationExtraction(pedestrians, labelName);
+result = informationExtraction(pedestrians, labelName);
+save("result.mat",'result');
 
 %% Visualize sliding windows images which are predicted as positive
 FRAME_INDEX = 3; % It can be 1 to 100 corresponding which frame to visualize
-visualizePrediction(pedestrians, FRAME_INDEX);
+%visualizePrediction(pedestrians, FRAME_INDEX);
 
 %% present the result
-% Re-run this block to redisplay the result
-FRAME_PER_SECOND = 5;
-presentation(pedestrians, FRAME_PER_SECOND);
+presentResult;

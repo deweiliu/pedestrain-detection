@@ -1,3 +1,3 @@
-function presentNMS(NMS, nRows, nColumns, plotIndex)
-    displayImage(NMS.image, nRows, nColumns, plotIndex);
+function presentNMS(NMS, nRows, nColumns)
+    displayImage(NMS.image, nRows, nColumns, 3);
 end

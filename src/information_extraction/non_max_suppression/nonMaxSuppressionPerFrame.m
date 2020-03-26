@@ -28,7 +28,7 @@ function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, frameIndex, l
     end
 
     NMSImage.image = image;
-    NMSImage.title = sprintf("%d Pedestrians", size(data));
+    NMSImage.title = sprintf("NMS: %d Pedestrians", size(data, 1));
 end
 
 function target = findPedestrian(sliding, frameIndex, labelName)

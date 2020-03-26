@@ -1,4 +1,4 @@
-function presentation(pedestrians, FPS)
-    numerisation(pedestrians.results);
-    visualisation(pedestrians, FPS);
+function presentation(results, FPS)
+    numerisation(results);
+    visualisation(results, FPS);
 end

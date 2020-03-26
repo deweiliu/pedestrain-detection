@@ -14,14 +14,11 @@
 % field - image(2-D matrix) - displayable image of current frame
 function highlightedImage = highlightSliding(pedestrians, method, frameIndex)
 
-    counts = highlightSlidingPerFrame(pedestrians, frameIndex, method);
-    maxCount = max(max(counts));
+    [counts, nWindows] = highlightSlidingPerFrame(pedestrians, frameIndex, method);
 
-    highlightedImage.frameIndex = frameIndex;
-    highlightedImage.title = sprintf("MAX(number of sliding windows convered, per pixel) = %d", maxCount);
+    highlightedImage.title = sprintf("%d Sliding Windows Detected", nWindows);
     % reference https://uk.mathworks.com/help/images/ref/stretchlim.html
     highlightedImage.image = imadjust(counts, stretchlim(counts, 0), []);
     highlightedImage.counts = counts;
-    highlightedImage.maxCount = maxCount;
 
 end

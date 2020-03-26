@@ -9,7 +9,7 @@
 %
 % Return:
 % highlightedImage (2-D matrix)
-function highlightedImage = highlightSlidingPerFrame(pedestrians, frameIndex, method)
+function [highlightedImage,nWindows] = highlightSlidingPerFrame(pedestrians, frameIndex, method)
     rows = pedestrians.nRows;
     columns = pedestrians.nColumns;
     highlightedImage = uint8(zeros(rows, columns));
