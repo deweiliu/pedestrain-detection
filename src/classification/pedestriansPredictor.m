@@ -3,7 +3,7 @@
 % model(model) - the fitted model(SVM)
 %% Returns
 % updated_pedestrians(struct) - the updated struct of object pedestrians with predicting labels
-function [updated_pedestrians] = pedestriansPredictor(pedestrians, model, scoreModel)
+function [updated_pedestrians] = pedestriansPredictor(pedestrians, model, labelName)
     for scale = 1:size(pedestrians.sliding, 2)
         tic
         fprintf("Predicting sliding windows with scale %.2f\n", pedestrians.sliding(scale).scale)
@@ -14,9 +14,9 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, model, scoreM
             for rowindex = 1:nRows
                 for colindex = 1:nColumns
                     % make prediction for svm
-                    [label,postProbs] = predict(scoreModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
+                    [label,postProbs] = predict(model, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
                     label = cell2logical(label);
-                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_SVM = label;
+                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).(labelName) = label;
                     pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).PostProbs = postProbs(:,2);
                 end
             end

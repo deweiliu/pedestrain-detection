@@ -1,18 +1,20 @@
-function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, frameIndex,labelName)
+function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, frameIndex, labelName)
     newPedestrian = true;
     image = pedestrians.images(:, :, :, frameIndex);
     sliding = pedestrians.sliding;
     data = [];
 
     while newPedestrian
+        % Keep searching for new pedestrian until none is found
 
-        [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameIndex,labelName);
+        target = findPedestrian(sliding, frameIndex, labelName);
 
-        if scaleIndex == 0
+        if target.(labelName) == false
+            % No new pedestrian was found
+            % End the loop
             newPedestrian = false;
         else
-            target = sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex);
-            sliding = removePedestrian(sliding, frameIndex, target,labelName);
+            sliding = removePedestrian(sliding, frameIndex, target, labelName);
             box.x = target.x;
             box.y = target.y;
             box.width = target.width;
@@ -29,8 +31,10 @@ function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, threshold, fr
     NMSImage.title = sprintf("%d Pedestrians", size(data));
 end
 
-function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameIndex,labelName)
+function target = findPedestrian(sliding, frameIndex, labelName)
     nScale = size(sliding, 2);
+    target.PostProbs = 0;
+    target.(labelName) = false;
 
     for scaleIndex = 1:nScale
         nRows = sliding(scaleIndex).nRows;
@@ -39,9 +43,10 @@ function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameInde
         for rowIndex = 1:nRows
 
             for columnIndex = 1:nColumns
+                window = sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex);
 
-                if sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex).(labelName) == true
-                    return;
+                if window.(labelName) == true & window.PostProbs > target.PostProbs
+                    target = window;
                 end
 
             end
@@ -50,11 +55,9 @@ function [scaleIndex, rowIndex, columnIndex] = findPedestrian(sliding, frameInde
 
     end
 
-    scaleIndex = 0;
-
 end
 
-function [sliding] = removePedestrian(sliding, frameIndex, target,labelName)
+function [sliding] = removePedestrian(sliding, frameIndex, target, labelName)
     nScale = size(sliding, 2);
 
     for scaleIndex = 1:nScale
@@ -82,11 +85,14 @@ function [sliding] = removePedestrian(sliding, frameIndex, target,labelName)
 
 end
 
+%% If two sliding windows overlap eachother for more than 50%
+% return true; else return false
 function isSame = isSamePedestrian(window1, window2)
     interction = rectint(window1.position, window2.position);
-    targetArea = window1.width * window2.height;
+    area1 = window1.width * window1.height;
+    area2 = window2.width * window2.height;
 
-    if interction > targetArea / 2
+    if (interction > area1 / 2) | (interction > area2 / 2)
         isSame = true;
     else
         isSame = false;

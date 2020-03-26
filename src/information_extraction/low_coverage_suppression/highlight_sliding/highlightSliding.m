@@ -1,13 +1,12 @@
-%% Given the pedestrians frames(images)
-% return a 3-D matrix representing the frames,
-% For each pixel (x,y,frameIndex) in the matrix, if there are N sliding windows covering this pixel,
-% the value of (x,y,frameIndex) is equal to N
+%% Given the pedestrians frame
+% For each pixel (x,y) in the matrix, if there are N sliding windows covering this pixel,
+% the value of (x,y) is equal to N
 %
 % Parameters:
 % pedestrians - The pedestrians object
 %
 % Return:
-% slidingCounts (list of structs) - each struct represent one frame
+% slidingCounts (struct) - The struct contains the following fields
 % field - counts(2-D matrix) -  image presenting the count of each pixel
 % field - maxCounts(integer) -  the maximum value of the field [counts]
 % field - title(string) - the title text of the image

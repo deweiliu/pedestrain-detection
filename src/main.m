@@ -30,14 +30,13 @@ pedestrians.sliding = slidingwindows(pedestrians, SLIDING_WIDTH, SLIDING_HEIGHT,
 
 %% Generating features for all testing images creating by sliding windows
 pedestrians = featureExtractorPedestrians(pedestrians);
+labelName = "label_HOG_SVM"; % The label to use in prediction
 
 %% Making prediction on all testing images by fitted model (SVM)
-pedestrians = pedestriansPredictor(pedestrians, svmModel, scoreSvmModel);
+pedestrians = pedestriansPredictor(pedestrians, scoreSvmModel, labelName);
 
 %% Extract information of pedestrians
-THRESHOLD = 2; % Greater or equal to 1, integer
-LABELLING_CONNECTIVITY = 4; % 8 or 4  # See https://uk.mathworks.com/help/images/ref/bwlabel.html
-pedestrians.results = informationExtraction(pedestrians, THRESHOLD, LABELLING_CONNECTIVITY);
+pedestrians.results = informationExtraction(pedestrians, labelName);
 
 %% Visualize sliding windows images which are predicted as positive
 FRAME_INDEX = 3; % It can be 1 to 100 corresponding which frame to visualize

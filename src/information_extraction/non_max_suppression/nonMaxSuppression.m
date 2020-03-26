@@ -1,11 +1,10 @@
-function NMS = nonMaxSuppression(pedestrians,labelName)
-    threshold = 0;
+function NMS = nonMaxSuppression(pedestrians, labelName)
     NMS = [];
 
     for frameIndex = 1:pedestrians.number
         result.frameIndex = frameIndex;
-        [result.image, result.data] = nonMaxSuppressionPerFrame(pedestrians, threshold, frameIndex,labelName);
-        result.framePath=pedestrians.paths(frameIndex);
+        [result.image, result.data] = nonMaxSuppressionPerFrame(pedestrians, frameIndex, labelName);
+        result.framePath = pedestrians.paths(frameIndex);
         NMS = [NMS; result];
 
     end

@@ -6,7 +6,7 @@
 % pedestrians - The pedestrians object
 %
 % Return:
-% labelledImages (list of structs) - each struct represent one frame
+% labelledImages (struct) - The struct contains the following fields
 % field - number(integer) - the number of the pedestrian in current image
 % field - title(string) - the title text of the image
 % field - frameIndex(integer) - the index of current frame
