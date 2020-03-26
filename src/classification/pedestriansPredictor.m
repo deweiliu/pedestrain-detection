@@ -1,9 +1,9 @@
 %% Parameters
 % pedestrians(struct) - the pedestrians object
-% model(model) - the fitted model(by SVM,KNN etc.)
+% model(model) - the fitted model(e.g. SVM, KNN etc.)
 %% Returns
 % updated_pedestrians(struct) - the updated struct of object pedestrians with predicting labels
-function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knnModel, randomForestModel)
+function [updated_pedestrians] = pedestriansPredictor(pedestrians, model)
 
     for scale = 1:size(pedestrians.sliding, 2)
         disp(sprintf("Predicting sliding windows with scale %.2f", pedestrians.sliding(scale).scale))
@@ -16,20 +16,14 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knn
             for rowindex = 1:nRows
 
                 for colindex = 1:nColumns
-                    % make prediction for svm
-                    label1 = predict(svmModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
-                    label1 = cell2logical(label1);
-                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_SVM = label1;
-
-                    % make prediction for knn
-                    %label2 = predict(knnModel, double(pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG));
-                    %label2 = cell2logical(label2);
-                    %pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_KNN = label2;
-
-                    % make prediction for random forest
-                    %label3 = predict(randomForestModel, pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG);
-                    %label3 = cell2logical(label3);
-                    %pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label_HOG_RF = label3;
+                    % TODO 
+                    % to get the score/probability
+                    % https://uk.mathworks.com/help/stats/classreg.learning.classif.compactclassificationsvm.predict.html
+                    features = pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).features_HOG;
+                    [label, score ]= predict(model, features);
+                    label = cell2logical(label);
+                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).label = label;
+                    pedestrians.sliding(scale).windows(rowindex, colindex, frameindex).score = score;
                 end
 
             end
@@ -40,14 +34,4 @@ function [updated_pedestrians] = pedestriansPredictor(pedestrians, svmModel, knn
 
     % update the pedestrians struct
     updated_pedestrians = pedestrians;
-end
-
-function label = cell2logical(origianlLabel)
-    label = origianlLabel;
-
-    if iscell(label)
-        label = label{1, 1};
-    end
-
-    label = logical(label);
 end
