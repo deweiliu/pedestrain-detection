@@ -7,12 +7,10 @@ dataset/
 
 # Do not upload the output files
 output/
-
-# Testing scripts
-*_test*.m
+graphs/
 
 # Matlab workspace files
 *.mat
 
 # windows cache file
-**humbs.db
+thumbs.db
