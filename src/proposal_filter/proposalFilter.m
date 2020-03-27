@@ -1,4 +1,4 @@
-function results = informationExtraction(pedestrians, labelName)
+function results = proposalFilter(pedestrians, labelName)
     %% Original Images
     results.origin = pedestrians.images;
 

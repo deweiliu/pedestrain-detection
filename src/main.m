@@ -22,22 +22,22 @@ svmModel = svmTrain(features.HOG);
 % compactSvmModel = compact(svmModel);
 scoreSvmModel = fitPosterior(svmModel);
 
-%% Sliding windows
+%% Generate sliding windows
 SLIDING_WIDTH = positives.nColumns;
 SLIDING_HEIGHT = positives.nRows;
 SLIDING_SCALES = [0.8, 1.2, 1.6, 2.0];
 SLIDING_GAP_PERCENTAGE = 0.4; % 40 per cent
 pedestrians.sliding = slidingwindows(pedestrians, SLIDING_WIDTH, SLIDING_HEIGHT, SLIDING_SCALES, SLIDING_GAP_PERCENTAGE);
 
-%% Generating features for all testing images creating by sliding windows
+%% Generating features for all sliding windows in testing images
 pedestrians = featureExtractorPedestrians(pedestrians);
-labelName = "label_HOG_SVM"; % The label to use in prediction
+labelName = "label_HOG_SVM"; % The label to be used in predictor
 
-%% Making prediction on all testing images by fitted model (SVM)
+%% Classify/predict the sliding windows in testing images
 pedestrians = pedestriansPredictor(pedestrians, scoreSvmModel, labelName);
 
-%% Extract information of pedestrians
-result = informationExtraction(pedestrians, labelName);
+%% Given all the proposals of sliding windows, select the ones in final result
+result = proposalFilter(pedestrians, labelName);
 save("result.mat", 'result');
 
 %% TO BE MOVED to a separate script
@@ -45,5 +45,5 @@ save("result.mat", 'result');
 FRAME_INDEX = 3; % It can be 1 to 100 corresponding which frame to visualize
 visualizePrediction(pedestrians, FRAME_INDEX, output);
 
-%% present the result
+%% evalute and present the result
 evaluationResult;
