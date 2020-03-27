@@ -4,6 +4,7 @@
 function [] = visualizePrediction(pedestrians, frame_index, output)
     directory = fullfile(output, "visualization/human_images");
     makedir(directory);
+    fig=figure(1);
 
     for scale = 1:size(pedestrians.sliding, 2)
         pedestrians.sliding(scale).windows(:, :, frame_index);
@@ -26,7 +27,7 @@ function [] = visualizePrediction(pedestrians, frame_index, output)
                     imageName = strcat('scale_', num2str(pedestrians.sliding(scale).scale), '_frame_', num2str(frame_index), ...
                         '_img_', num2str(num), '.jpg');
 
-                    saveas(gcf, fullfile(directory, imageName));
+                    saveas(fig, fullfile(directory, imageName));
                     pause(0.5);
                 end
 
