@@ -8,6 +8,6 @@ function presentLCS(LCS, nRows, nColumns)
     displayImage(LCS.labels, nRows, nColumns, plotIndex);
 
     % Display counting bounding box image
-    plotIndex = 2;
+    plotIndex = nColumns + 3;
     displayImage(LCS.boundings, nRows, nColumns, plotIndex);
 end

@@ -1,5 +1,5 @@
 function numerisation(results)
-    methods = ["LCS"; "NMS"];
+    methods = ["LCS"; "NMS_IoU";"NMS_IoM"];
 
     for index = 1:size(methods)
         filePath = writeResult(results.(methods(index)), methods(index));

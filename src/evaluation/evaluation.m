@@ -4,14 +4,17 @@ function evaluation(result)
     test = readDataset("../dataset/test.dataset");
 
     LCS = readDataset("../output/LCS.dataset");
-    NMS = readDataset("../output/NMS.dataset");
+    NMS_IoU = readDataset("../output/NMS_IoU.dataset");
+    NMS_IoM = readDataset("../output/NMS_IoM.dataset");
 
     % pedestrian & non-pedestrian
     [p, np] = compareDataset(test, LCS);
     printEvaluation(p, np, "LCS");
 
-    [p, np] = compareDataset(test, NMS);
-    printEvaluation(p, np, "NMS");
+    [p, np] = compareDataset(test, NMS_IoU);
+    printEvaluation(p, np, "NMS IoU");
+    [p, np] = compareDataset(test, NMS_IoM);
+    printEvaluation(p, np, "NMS IoM");
 end
 
 function printEvaluation(p, np, name)

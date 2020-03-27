@@ -1,4 +1,4 @@
-function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, frameIndex, labelName)
+function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, frameIndex, labelName, IoU)
     newPedestrian = true;
     image = pedestrians.images(:, :, :, frameIndex);
     sliding = pedestrians.sliding;
@@ -14,7 +14,7 @@ function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, frameIndex, l
             % End the loop
             newPedestrian = false;
         else
-            sliding = removePedestrian(sliding, frameIndex, target, labelName);
+            sliding = removePedestrian(sliding, frameIndex, target, labelName, IoU);
             box.x = target.x;
             box.y = target.y;
             box.width = target.width;
@@ -28,7 +28,13 @@ function [NMSImage, data] = nonMaxSuppressionPerFrame(pedestrians, frameIndex, l
     end
 
     NMSImage.image = image;
-    NMSImage.title = sprintf("NMS: %d Pedestrians", size(data, 1));
+
+    if IoU
+        NMSImage.title = sprintf("NMS-IoU: %d Pedestrians", size(data, 1));
+    else
+        NMSImage.title = sprintf("NMS-IoM: %d Pedestrians", size(data, 1));
+    end
+
 end
 
 function target = findPedestrian(sliding, frameIndex, labelName)
@@ -57,7 +63,7 @@ function target = findPedestrian(sliding, frameIndex, labelName)
 
 end
 
-function [sliding] = removePedestrian(sliding, frameIndex, target, labelName)
+function [sliding] = removePedestrian(sliding, frameIndex, target, labelName, IoU)
     nScale = size(sliding, 2);
 
     for scaleIndex = 1:nScale
@@ -71,7 +77,7 @@ function [sliding] = removePedestrian(sliding, frameIndex, target, labelName)
 
                 if window.(labelName) == true
 
-                    if isSamePedestrian(target, window)
+                    if isSamePedestrian(target, window, IoU)
                         sliding(scaleIndex).windows(rowIndex, columnIndex, frameIndex).(labelName) = false;
                     end
 
@@ -87,15 +93,19 @@ end
 
 %% If two sliding windows overlap eachother for more than 50%
 % return true; else return false
-function isSame = isSamePedestrian(window1, window2)
+% reference https://towardsdatascience.com/non-maximum-suppression-nms-93ce178e177c
+function isSame = isSamePedestrian(window1, window2, IoU)
+
     interction = rectint(window1.position, window2.position);
     area1 = window1.width * window1.height;
     area2 = window2.width * window2.height;
 
-    if (interction > area1 / 2) | (interction > area2 / 2)
-        isSame = true;
+    if IoU
+        union = area1 + area2 - interction;
+        isSame = (interction > union / 2);
     else
-        isSame = false;
+        minimum = min(area1, area2);
+        isSame = (interction > minimum / 2);
     end
 
 end

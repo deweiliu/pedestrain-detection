@@ -3,8 +3,6 @@
 % FPS (integer) - frame per second
 % results(struct) - containing the results and the original video
 function visualisation(results, FPS)
-    LCS = results.LCS;
-    NMS = results.NMS;
     nRows = 2;
     nColumns = 3;
 
@@ -21,10 +19,10 @@ function visualisation(results, FPS)
         presentOriginal(results.origin, frameIndex, nRows, nColumns);
 
         % Display LCS
-        presentLCS(LCS(frameIndex), nRows, nColumns);
+        presentLCS(results.LCS(frameIndex), nRows, nColumns);
 
         % Display NMS
-        presentNMS(NMS(frameIndex), nRows, nColumns);
+        presentNMS(results.NMS_IoU(frameIndex), results.NMS_IoM(frameIndex), nRows, nColumns);
 
     end
 
