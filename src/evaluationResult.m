@@ -13,6 +13,8 @@ makedir(output);
 
 %% Load result
 load("result.mat");
+
 % Present the result
-FRAME_PER_SECOND = 5;
-presentation(result, FRAME_PER_SECOND);
+FRAME_PER_SECOND = 10;
+
+evaluation(result, FRAME_PER_SECOND);
