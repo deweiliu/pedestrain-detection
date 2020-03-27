@@ -4,7 +4,8 @@
 setupEnvir;
 
 %% Constants for the script
-GRAPHS_DIRECTORY = "../graphs";
+GRAPHS_DIRECTORY = fullfile(output, "graphs");
+makedir(GRAPHS_DIRECTORY);
 RGB_ERROR_RATE_GRAPH_FILE = "rgb_error_rate_quantization_compare.svg";
 HSV_ERROR_RATE_GRAPH_FILE = "hsv_error_rate_quantization_compare.svg";
 

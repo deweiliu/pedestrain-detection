@@ -4,7 +4,8 @@
 setupEnvir;
 
 %% Constants for the script
-GRAPHS_DIRECTORY = "../graphs";
+GRAPHS_DIRECTORY = fullfile(output, "graphs");
+makedir(GRAPHS_DIRECTORY);
 RAW_DATA_ERROR_RATE_GRAPH_FILE = "raw_data_image_size_compare.svg";
 
 %% Training images Pre-processing
