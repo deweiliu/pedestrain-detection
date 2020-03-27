@@ -1,24 +1,28 @@
-function quantisation(result)
-    numerisation(result);
-
+function quantisation(result, output)
+    filePaths = numerisation(result, output);
     test = readDataset("../dataset/test.dataset");
 
-    LCS = readDataset("../output/LCS.dataset");
-    NMS_IoU = readDataset("../output/NMS_IoU.dataset");
-    NMS_IoM = readDataset("../output/NMS_IoM.dataset");
+    % LCS Evaluation
+    filePath = filePaths(1);
+    LCS = readDataset(filePath);
+    [positives, negatives] = compareDataset(test, LCS);
+    printEvaluation(positives, negatives, "LCS");
 
-    % pedestrian & non-pedestrian
-    [p, np] = compareDataset(test, LCS);
-    printEvaluation(p, np, "LCS");
+    % NMS IoU Evaluation
+    filePath = filePaths(2);
+    NMS_IoU = readDataset(filePath);
+    [positives, negatives] = compareDataset(test, NMS_IoU);
+    printEvaluation(positives, negatives, "NMS IoU");
 
-    [p, np] = compareDataset(test, NMS_IoU);
-    printEvaluation(p, np, "NMS IoU");
-    [p, np] = compareDataset(test, NMS_IoM);
-    printEvaluation(p, np, "NMS IoM");
+    % NMS IoM Evaluation
+    filePath = filePaths(3);
+    NMS_IoM = readDataset(filePath);
+    [positives, negatives] = compareDataset(test, NMS_IoM);
+    printEvaluation(positives, negatives, "NMS IoM");
 end
 
-function printEvaluation(p, np, name)
-    result = table(p, np, 'VariableNames', {'positive', 'negative'}, 'RowNames', {'pedestrian', 'non-pedestrian'});
+function printEvaluation(positives, negatives, name)
+    result = table(positives, negatives, 'VariableNames', {'positive', 'negative'}, 'RowNames', {'pedestrian', 'non-pedestrian'});
     fprintf("Confusion Matrix for %s result\n", name);
     disp(result);
     fprintf("\n");

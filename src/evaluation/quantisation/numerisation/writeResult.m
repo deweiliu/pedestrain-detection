@@ -1,5 +1,6 @@
-function filePath = writeResult(results, method)
-    filePath = sprintf("../output/%s.dataset", method);
+function filePath = writeResult(results, method, output)
+    fileName = sprintf("%s.dataset", method);
+    filePath = fullfile(output, fileName);
     fileID = fopen(filePath, 'w');
 
     nFrames = size(results, 1);

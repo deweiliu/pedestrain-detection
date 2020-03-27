@@ -1,4 +1,4 @@
-function evaluation(results, FPS)
-    quantisation(results);
+function evaluation(results, FPS, output)
+    quantisation(results, output);
     visualisation(results, FPS);
 end

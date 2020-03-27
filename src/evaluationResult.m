@@ -10,6 +10,8 @@ addpath(paths);
 %% Create output directory
 output = "../output";
 makedir(output);
+output = fullfile(output, "dataset");
+makedir(output);
 
 %% Load result
 try
@@ -23,4 +25,4 @@ end
 %% Present the result
 FRAME_PER_SECOND = 10;
 
-evaluation(result, FRAME_PER_SECOND);
+evaluation(result, FRAME_PER_SECOND, output);

@@ -1,4 +1,4 @@
-function [p, np] = compareDataset(test, prediction)
+function [positives, negatives] = compareDataset(test, prediction)
     nImages = size(test, 1);
     count = 0;
 
@@ -9,10 +9,11 @@ function [p, np] = compareDataset(test, prediction)
 
     pPositive = count;
     pNegative = totalCount(test) - pPositive;
-    p = [pPositive; pNegative];
-
     npPositive = totalCount(prediction) - pPositive;
-    np = [npPositive; Inf];
+    npNegative = Inf;
+
+    positives = [pPositive; npPositive];
+    negatives = [pNegative; npNegative];
 
 end
 
