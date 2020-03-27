@@ -4,10 +4,11 @@ function image = parseLine(line)
     image.path = texts(1, :);
     image.nPedestrians = str2num(texts(2, :));
     image.boxes = [];
-
+   
     for index = 1:image.nPedestrians
         begin = 3 + 5 * (index - 1);
-        box = parseBox(texts(begin:begin + 5, :));
+        
+        box = parseBox(texts(begin:begin + 4, :));
         image.boxes = [image.boxes; box];
     end
 

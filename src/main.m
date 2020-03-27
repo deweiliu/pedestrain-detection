@@ -41,6 +41,9 @@ result = informationExtraction(pedestrians, labelName);
 save("result.mat", 'result');
 
 %% Evaluation
+clear result
+load("result.mat");
+
 evaluation(result);
 
 %% Visualize sliding windows images which are predicted as positive
