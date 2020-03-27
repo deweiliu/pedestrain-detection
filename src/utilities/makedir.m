@@ -2,6 +2,7 @@
 function isExist = makedir(directory)
 
     if exist(directory, 'dir') == 0
+        fprintf("Creating new directory %s\n", directory);
         isExist = false;
         mkdir(directory);
     else

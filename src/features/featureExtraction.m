@@ -1,5 +1,8 @@
-function features = featureExtraction(positives, negatives)
-    FEATURES_DIRECTORY = "../dataset/features_datasets";
+function features = featureExtraction(positives, negatives,output)
+
+    FEATURES_DIRECTORY = fullfile(output, "features_datasets");
+    makedir(FEATURES_DIRECTORY);
+
     COLOUR_HISTOGRAM_RGB_FILE = "colour_histogram_rgb_feature.csv";
     COLOUR_HISTOGRAM_HSV_FILE = "colour_histogram_hsv_feature.csv";
     RAW_DATA_FILE = "raw_data_feature.csv";
@@ -12,11 +15,6 @@ function features = featureExtraction(positives, negatives)
     ], "VariableNames", ["Label", "Name"]);
     metaTable.Label = str2double(metaTable.Label);
         
-    % Check the existance of features files folder
-    if exist(FEATURES_DIRECTORY,'dir') == 0
-        fprintf("path: %s does not exist.\nCreating one.\n", FEATURES_DIRECTORY);
-        mkdir(FEATURES_DIRECTORY); 
-    end
     
     % HOG
     features.HOG = generateOrLoadFeature(true, metaTable, positives, negatives, ...

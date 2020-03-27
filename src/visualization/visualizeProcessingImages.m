@@ -1,10 +1,7 @@
-function [] = visualizeProcessingImages(imageStruct, imageIndex)
-    VISUALIZATION_DIRECTORY = "../dataset/visualization";
+function [] = visualizeProcessingImages(imageStruct, imageIndex,output)
+    VISUALIZATION_DIRECTORY=fullfile(output,"visualization");
+    makedir(VISUALIZATION_DIRECTORY);
 
-    if exist(VISUALIZATION_DIRECTORY, 'dir') == 0
-        fprintf("path: %s does not exist.\nCreating one\n", VISUALIZATION_DIRECTORY);
-        mkdir(VISUALIZATION_DIRECTORY);
-    end
 
     tiledlayout(2, 2);
     nexttile

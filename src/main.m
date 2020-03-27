@@ -7,15 +7,15 @@ setupEnvir;
 positives = preprocessing(positives);
 negatives = preprocessing(negatives);
 
-%% TO BE REMOVED
+%% TO BE MOVED to a separate script
 % Visualize processing images
 IMAGE_INDEX = 1;
 % If parameter is positives, IMAGE_INDEX must not exceed 2003.
 % If parameter is negatives, IMAGE_INDEX must not exceed 997.
-%visualizeProcessingImages(positives, IMAGE_INDEX)
+visualizeProcessingImages(positives, IMAGE_INDEX, output);
 
 %% Feature Extraction on training set
-features = featureExtraction(positives, negatives);
+features = featureExtraction(positives, negatives, output);
 
 %% train svm model
 svmModel = svmTrain(features.HOG);
@@ -40,9 +40,10 @@ pedestrians = pedestriansPredictor(pedestrians, scoreSvmModel, labelName);
 result = informationExtraction(pedestrians, labelName);
 save("result.mat", 'result');
 
-%% Visualize sliding windows images which are predicted as positive
+%% TO BE MOVED to a separate script
+%Visualize sliding windows images which are predicted as positive
 FRAME_INDEX = 3; % It can be 1 to 100 corresponding which frame to visualize
-%visualizePrediction(pedestrians, FRAME_INDEX);
+visualizePrediction(pedestrians, FRAME_INDEX, output);
 
 %% present the result
 evaluationResult;
