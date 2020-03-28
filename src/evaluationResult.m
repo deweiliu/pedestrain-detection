@@ -23,6 +23,6 @@ catch
 end
 
 %% Present the result
-FRAME_PER_SECOND = 10;
+FRAME_PER_SECOND = 1;
 
 evaluation(result, FRAME_PER_SECOND, output);

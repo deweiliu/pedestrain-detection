@@ -12,7 +12,7 @@
 function [highlightedImage,nWindows] = highlightSlidingPerFrame(pedestrians, frameIndex, method)
     rows = pedestrians.nRows;
     columns = pedestrians.nColumns;
-    highlightedImage = uint8(zeros(rows, columns));
+    highlightedImage = zeros(rows, columns);
     identifiedWindows = findIdentifiedWindowsPerFrame(pedestrians.sliding, frameIndex, method);
     nWindows = size(identifiedWindows, 2);
 

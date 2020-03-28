@@ -18,11 +18,15 @@ function highlightedWindow = highlightSlidingPerWindow(totalRows, totalColumns, 
     for row = ymin:ymax
 
         for column = xmin:xmax
-            highlightedWindow(row, column) = 1;
+            highlightedWindow(row, column) = transformAlgorithm(window.PostProbs);
         end
 
     end
 
-    highlightedWindow = uint8(highlightedWindow);
+%     highlightedWindow = uint8(highlightedWindow);
 
+end
+
+function [transProb] = transformAlgorithm(prob)
+    transProb = 2^(10 * (prob-1))+1;
 end
