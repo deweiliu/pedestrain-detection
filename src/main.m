@@ -19,7 +19,7 @@ scoreSvmModel = fitPosterior(svmModel);
 SLIDING_WIDTH = positives.nColumns;
 SLIDING_HEIGHT = positives.nRows;
 SLIDING_SCALES = [0.6, 1.0, 1.4, 1.8, 2.2, 2.6];
-SLIDING_GAP_PERCENTAGE = 0.3; % 20 per cent
+SLIDING_GAP_PERCENTAGE = 0.3; % 30 per cent
 pedestrians.sliding = slidingwindows(pedestrians, SLIDING_WIDTH, SLIDING_HEIGHT, SLIDING_SCALES, SLIDING_GAP_PERCENTAGE);
 
 %% Section 6. Generating features for all sliding windows in testing images
