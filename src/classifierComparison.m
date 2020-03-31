@@ -20,7 +20,7 @@ labels = logical(tableToArray(labels));
 %% random forest model parameter tuning
 % Tunning parameter
 rfFigure = rfParaTuning(features, labels);
-filePath = fullfile(OUTPUT_DIR, 'random_forest_param_tunning.svg');
+filePath = fullfile(OUTPUT_DIR, 'random_forest_param_tunning.jpg');
 saveas(rfFigure, filePath);
 fprintf("RF graph saved at %s\n", filePath);
 
@@ -30,7 +30,7 @@ rfModel = randomForestTrain(features, labels, OPTIMISED_NUM_TREES);
 rfPredictions = rfTest(rfModel);
 rfConfusion = confusionchart(labels, rfPredictions);
 title("Random Forest Confusion Matrix");
-filePath = fullfile(OUTPUT_DIR, 'random_forest_confusion_matrix.svg');
+filePath = fullfile(OUTPUT_DIR, 'random_forest_confusion_matrix.jpg');
 saveas(rfConfusion, filePath);
 fprintf("RF confusion matrix saved at %s\n", filePath);
 
@@ -38,7 +38,7 @@ fprintf("RF confusion matrix saved at %s\n", filePath);
 svmParaTuning(allFeatures.HOG)
 % Best parameters are selected
 % BoxConstraint    KernelScale
-% 1.2541           0.3364 
+% 1.2541           0.3364
 
 %% svm model testing
 svmModel = svmTrain(allFeatures.HOG);
@@ -71,4 +71,3 @@ title("KNN Confusion Matrix");
 filePath = fullfile(OUTPUT_DIR, 'knn_confusion_matrix.jpg');
 saveas(knnConfusion, filePath);
 fprintf("KNN confusion matrix saved at %s\n", filePath);
-
