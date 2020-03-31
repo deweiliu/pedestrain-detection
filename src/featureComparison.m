@@ -8,7 +8,7 @@ positives = preprocessing(positives);
 negatives = preprocessing(negatives);
 
 %% Feature Extraction on training set
-features = featureExtraction(positives, negatives);
+features = featureExtraction(positives, negatives, output);
 
 %% Calculate cross validated accuracies
 errorRates = [];
