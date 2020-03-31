@@ -39,7 +39,7 @@ features = [[posLabels; posLabels;posLabels;posLabels;negLabels;negLabels;negLab
 fprintf("%d original training images\n", SAMPLE_SIZE);
 selectFeatures = [features([1:SAMPLE_SIZE,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5],1),...
     features([1:SAMPLE_SIZE,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5],2:end)];
-rng(3064)
+rng(3061)
 selectFeatures = selectFeatures(randperm(size(selectFeatures,1)),:);
 model = fitcsvm(selectFeatures(:,2:end), selectFeatures(:,1), 'KernelFunction', 'linear');
 svmTest(model)
@@ -48,7 +48,7 @@ svmTest(model)
 fprintf("%d original training images + %d contrast enhanced images\n", SAMPLE_SIZE, SAMPLE_SIZE);
 selectFeatures = [features([1:SAMPLE_SIZE,SAMPLE_SIZE+1:SAMPLE_SIZE*2,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5,SAMPLE_SIZE*5+1:SAMPLE_SIZE*6],1),...
     features([1:SAMPLE_SIZE,SAMPLE_SIZE+1:SAMPLE_SIZE*2,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5,SAMPLE_SIZE*5+1:SAMPLE_SIZE*6],2:end)];
-rng(3064)
+rng(3061)
 selectFeatures = selectFeatures(randperm(size(selectFeatures,1)),:);
 model = fitcsvm(selectFeatures(:,2:end), selectFeatures(:,1), 'KernelFunction', 'linear');
 svmTest(model)
@@ -57,7 +57,7 @@ svmTest(model)
 fprintf("%d original training images + %d flip horizontally images\n", SAMPLE_SIZE, SAMPLE_SIZE);
 selectFeatures = [features([1:SAMPLE_SIZE,SAMPLE_SIZE*2+1:SAMPLE_SIZE*3,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5,SAMPLE_SIZE*6+1:SAMPLE_SIZE*7],1),...
     features([1:SAMPLE_SIZE,SAMPLE_SIZE*2+1:SAMPLE_SIZE*3,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5,SAMPLE_SIZE*6+1:SAMPLE_SIZE*7],2:end)];
-rng(3064)
+rng(3061)
 selectFeatures = selectFeatures(randperm(size(selectFeatures,1)),:);
 model = fitcsvm(selectFeatures(:,2:end), selectFeatures(:,1), 'KernelFunction', 'linear');
 svmTest(model)
@@ -66,7 +66,7 @@ svmTest(model)
 fprintf("%d original training images + %d contrast enhanced and flip horizontally images\n", SAMPLE_SIZE, SAMPLE_SIZE);
 selectFeatures = [features([1:SAMPLE_SIZE,SAMPLE_SIZE*3+1:SAMPLE_SIZE*4,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5,SAMPLE_SIZE*7+1:SAMPLE_SIZE*8],1),...
     features([1:SAMPLE_SIZE,SAMPLE_SIZE*3+1:SAMPLE_SIZE*4,SAMPLE_SIZE*4+1:SAMPLE_SIZE*5,SAMPLE_SIZE*7+1:SAMPLE_SIZE*8],2:end)];
-rng(3064)
+rng(3061)
 selectFeatures = selectFeatures(randperm(size(selectFeatures,1)),:);
 model = fitcsvm(selectFeatures(:,2:end), selectFeatures(:,1), 'KernelFunction', 'linear');
 svmTest(model)
