@@ -1,4 +1,4 @@
-function features = featureExtraction(positives, negatives,output)
+function features = featureExtraction(positives, negatives, output)
 
     FEATURES_DIRECTORY = fullfile(output, "features_datasets");
     makedir(FEATURES_DIRECTORY);

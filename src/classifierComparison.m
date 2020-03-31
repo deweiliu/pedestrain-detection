@@ -12,7 +12,7 @@ positives = preprocessing(positives);
 negatives = preprocessing(negatives);
 
 %% Feature Extraction on training set
-allFeatures = featureExtraction(positives, negatives);
+allFeatures = featureExtraction(positives, negatives, output);
 features = allFeatures.HOG(:, 3:end);
 labels = allFeatures.HOG(:, 1);
 labels = logical(tableToArray(labels));
@@ -45,6 +45,7 @@ svmModel = svmTrain(allFeatures.HOG);
 svmTest(svmModel)
 
 % using cross validation on confusion matrix
+rng(3061)
 crossValModel = crossval(svmModel);
 svmPredictions = logical(kfoldPredict(crossValModel));
 svmConfusion = confusionchart(labels, svmPredictions);
